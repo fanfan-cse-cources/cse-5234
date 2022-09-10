@@ -26,9 +26,21 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Database
+
+### macOS
+
+```bash
+$ brew install mysql
+$ brew services restart mysql
+$ mysql_secure_installation
+$ mysql -u root -p <database_name> < db/schema.sql
+```
+
 ## Installation
 
 ```bash
+$ npm i -g @nestjs/cli
 $ npm install
 ```
 
