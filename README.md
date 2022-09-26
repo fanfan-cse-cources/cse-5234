@@ -11,4 +11,5 @@ $ nvm use 16
 $ node -v
 v16.10.0
 $ npm i -g corepack
+$ yarn global add umi
 ```
