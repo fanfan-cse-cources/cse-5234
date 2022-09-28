@@ -1,4 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
+import { ItemService } from '../item/item.service';
 
 @Controller('purchase')
-export class PurchaseController {}
+export class PurchaseController {
+  constructor(private itemService: ItemService) {}
+  @Get()
+  GetProducts() {
+    return this.itemService.getAllItem();
+  }
+}

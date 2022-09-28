@@ -8,6 +8,8 @@ import { OrderModule } from './order/order.module';
 import { ItemModule } from './item/item.module';
 import { PaymentInfoModule } from './payment-info/payment-info.module';
 import { ShippingInfoModule } from './shipping-info/shipping-info.module';
+import { Item } from './entities/Item';
+import { ItemService } from './item/item.service';
 
 @Module({
   imports: [
@@ -22,12 +24,13 @@ import { ShippingInfoModule } from './shipping-info/shipping-info.module';
       entities: [],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Item]),
     OrderModule,
     ItemModule,
     PaymentInfoModule,
     ShippingInfoModule,
   ],
   controllers: [AppController, PurchaseController],
-  providers: [AppService],
+  providers: [AppService, ItemService],
 })
 export class AppModule {}
