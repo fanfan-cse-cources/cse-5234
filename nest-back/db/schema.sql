@@ -10,6 +10,10 @@ CREATE TABLE `Item` (
     PRIMARY KEY (`item_id`)
 );
 
+INSERT INTO `Item` (name, price, quantity) VALUES ("Amuseable Yule Log", 22.50, 20);
+INSERT INTO `Item` (name, price, quantity) VALUES ("Festive Folly Christmas Pudding", 10.00, 15);
+INSERT INTO `Item` (name, price, quantity) VALUES ("Amuseable Snowball", 12.00, 5);
+
 CREATE TABLE `PaymentInfo` (
     `payment_id` INT unsigned NOT NULL AUTO_INCREMENT,
     `card_num` TEXT NOT NULL,
