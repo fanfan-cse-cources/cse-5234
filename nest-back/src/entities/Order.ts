@@ -19,7 +19,7 @@ export class Order {
   @Column('date', { name: 'date' })
   date: string;
 
-  @Column('double', { name: 'total_price', unsigned: true, precision: 22 })
+  @Column('double', { name: 'total_price' })
   totalPrice: number;
 
   @Column('text', { name: 'item_ids' })

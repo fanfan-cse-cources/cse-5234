@@ -8,7 +8,7 @@ export class Item {
   @Column('text', { name: 'name' })
   name: string;
 
-  @Column('double', { name: 'price', unsigned: true, precision: 22 })
+  @Column('double', { name: 'price' })
   price: number;
 
   @Column('int', { name: 'quantity', unsigned: true })

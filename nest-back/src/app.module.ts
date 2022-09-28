@@ -10,6 +10,9 @@ import { PaymentInfoModule } from './payment-info/payment-info.module';
 import { ShippingInfoModule } from './shipping-info/shipping-info.module';
 import { Item } from './entities/Item';
 import { ItemService } from './item/item.service';
+import { Order } from './entities/Order';
+import { PaymentInfo } from './entities/PaymentInfo';
+import { ShippingInfo } from './entities/ShippingInfo';
 
 @Module({
   imports: [
@@ -21,10 +24,10 @@ import { ItemService } from './item/item.service';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [],
+      entities: ['./entities/*.ts'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Item]),
+    TypeOrmModule.forFeature([Item, Order, PaymentInfo, ShippingInfo]),
     OrderModule,
     ItemModule,
     PaymentInfoModule,
