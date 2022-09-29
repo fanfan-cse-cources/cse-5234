@@ -1,9 +1,9 @@
 
-export default function ViewOrder() {
+export default function PaymentEntry() {
     return (
       <div>
         <h1>
-        ViewOrder
+        PaymentEntry
         </h1>
       </div>
     );
