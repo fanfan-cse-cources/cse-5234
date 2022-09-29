@@ -8,6 +8,9 @@ export class Item {
   @Column('text', { name: 'name' })
   name: string;
 
+  @Column('text', { name: 'description' })
+  description: string;
+
   @Column('double', { name: 'price' })
   price: number;
 
