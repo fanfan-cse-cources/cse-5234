@@ -1,9 +1,9 @@
 
-export default function ViewOrder() {
+export default function ShippingEntry() {
     return (
       <div>
         <h1>
-        ViewOrder
+        ShippingEntry
         </h1>
       </div>
     );

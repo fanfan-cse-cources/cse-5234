@@ -1,9 +1,9 @@
 
-export default function ViewOrder() {
+export default function ViewConfirmation() {
     return (
       <div>
         <h1>
-        ViewOrder
+        ViewConfirmation
         </h1>
       </div>
     );
