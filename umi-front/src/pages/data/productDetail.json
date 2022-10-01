@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Rice",
+    "desc": "Yummy Rice",
+    "price": 1.2
+  },
+  {
+    "name": "Noodle",
+    "desc": "Yummy Noodle",
+    "price": 2.5
+  },
+  {
+    "name": "Pizza",
+    "desc": "Yummy Pizza",
+    "price": 7.99
+  },
+  {
+    "name": "Hamburger",
+    "desc": "Yummy Hamburger",
+    "price": 3.68
+  },
+  {
+    "name": "Ramen",
+    "desc": "Yummy Ramen",
+    "price": 11.99
+  }
+]

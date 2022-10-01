@@ -1,43 +1,16 @@
 import ViewOrder from "./ViewOrder";
 import {useState} from "react";
+import productDetail from "./data/productDetail.json"
 
 export default function Purchase() {
-  const productDetail = [
-    {
-      name: "Rice",
-      desc: "Yummy Rice",
-      price: 1.2,
-    },
-    {
-      name: "Noodle",
-      desc: "Yummy Noodle",
-      price: 2.5,
-    },
-    {
-      name: "Pizza",
-      desc: "Yummy Pizza",
-      price: 7.99,
-    },
-    {
-      name: "Hamburger",
-      desc: "Yummy Hamburger",
-      price: 3.68,
-    },
-    {
-      name: "Ramen",
-      desc: "Yummy Ramen",
-      price: 11.99,
-    }
-  ];
-
   const [order, setOrder] = useState({
-    quantity: [0, 0, 0, 0, 0]
+    quantity: Array.from(Array(productDetail.length).keys())
   })
-  const onAdd = (e: string | number, i: number) => {
-    alert("Adding " + e + "of product " + productDetail[i].name)
+  const onAdd = (e: number, i: number) => {
+    alert("Adding " + e + " of product " + productDetail[i].name)
   }
   
-  const generaterow = (i: number) => {
+  const generateRow = (i: number) => {
     return (
       <tr>
         <td>{productDetail[i].name}</td>
@@ -67,24 +40,11 @@ export default function Purchase() {
           <th>Quantity</th>
           <th>Action</th>
         </tr>
-        <tr>
-          <td>Noodle</td>
-          <td>Yummy Noodle</td>
-          <td>$2</td>
-          <td>
-            <input type="number" name="quantity" form="my_form" onChange={(e) => {
-              order.quantity[0] = Number(e.target.value)
-            }}/>
-          </td>
-          <td>
-            <button type="button" form="my_form" onClick={(e) => onAdd(order.quantity[0], 0)}>add</button>
-          </td>
-        </tr>
-        {generaterow(0)}
-        {generaterow(1)}
-        {generaterow(2)}
-        {generaterow(3)}
-        {generaterow(4)}
+        {generateRow(0)}
+        {generateRow(1)}
+        {generateRow(2)}
+        {generateRow(3)}
+        {generateRow(4)}
       </table>
     </div>
   );
