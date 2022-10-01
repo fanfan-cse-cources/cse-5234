@@ -6,27 +6,27 @@ export default function Purchase() {
     {
       name: "Rice",
       desc: "Yummy Rice",
-      price: "$1.2",
+      price: 1.2,
     },
     {
       name: "Noodle",
       desc: "Yummy Noodle",
-      price: "$2.5",
+      price: 2.5,
     },
     {
       name: "Pizza",
       desc: "Yummy Pizza",
-      price: "$7.99",
+      price: 7.99,
     },
     {
       name: "Hamburger",
       desc: "Yummy Hamburger",
-      price: "$3.68",
+      price: 3.68,
     },
     {
       name: "Ramen",
       desc: "Yummy Ramen",
-      price: "$11.99",
+      price: 11.99,
     }
   ];
 
@@ -42,7 +42,7 @@ export default function Purchase() {
       <tr>
         <td>{productDetail[i].name}</td>
         <td>{productDetail[i].desc}</td>
-        <td>{productDetail[i].price}</td>
+        <td>${productDetail[i].price}</td>
         <td>
           <input type="number" name="quantity" form="my_form" onChange={(e) => {
             order.quantity[i] = Number(e.target.value)
