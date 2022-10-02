@@ -3,7 +3,6 @@ import productDetail from "./data/productDetail.json"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 import {useState} from "react";
-import styles from './layouts/ViewConfirmation.less';
 
 const info = {
   order_id: faker.random.numeric(),
@@ -32,14 +31,14 @@ const generatePurchaseDetail = (i: number) => {
 
 export default function ViewConfirmation() {
   return (
-    <div className={styles.body}>
+    <div className={"row p-5"}>
       <h1>Confirmation</h1>
-      <Alert variant='success'>
+      <Alert variant='success' className={"col p-3"}>
         Your order #{info.order_id} has been confirmed, {info.first_name}.
       </Alert>
 
       <div className={"row"}>
-        <div className={"col p-5"}>
+        <div className={"col"}>
           <h2>Your Orders</h2>
           <table className={"table"}>
             <thead>
@@ -59,22 +58,22 @@ export default function ViewConfirmation() {
       </div>
 
       <div className={"row"}>
-        <div className={"col p-5"}>
+        <div className={"col"}>
           <h2>Shipping Address</h2>
           <div>
-            <p className={styles.p}>{info.first_name} {info.last_name}</p>
-            <p className={styles.p}>{info.addr_1}</p>
-            <p className={styles.p}>{info.addr_2}</p>
+            <p className={"pb-2"}>{info.first_name} {info.last_name}</p>
+            <p className={"pb-2"}>{info.addr_1}</p>
+            <p className={"pb-2"}>{info.addr_2}</p>
           </div>
         </div>
 
-        <div className={"col p-5"}>
+        <div className={"pb-2"}>
           <h2>Payment Information</h2>
           <div>
-            <p className={styles.p}>{info.first_name} {info.last_name}</p>
+            <p className={"pb-2"}>{info.first_name} {info.last_name}</p>
             <p
-              className={styles.p}>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
-            <p className={styles.p}>{info.card_exp}</p>
+              className={"pb-2"}>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
+            <p className={"pb-2"}>{info.card_exp}</p>
           </div>
         </div>
       </div>
