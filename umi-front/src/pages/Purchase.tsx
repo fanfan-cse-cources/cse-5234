@@ -1,4 +1,3 @@
-import ViewOrder from "./ViewOrder";
 import {useState} from "react";
 import productDetail from "./data/productDetail.json"
 
