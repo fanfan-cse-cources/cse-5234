@@ -1,7 +1,7 @@
-import {faker} from '@faker-js/faker';
-import productDetail from "./data/productDetail.json"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
+import {generateTable} from "./util/GenerateOrderDetails"
+import {faker} from "@faker-js/faker";
 import {useState} from "react";
 
 const info = {
@@ -18,16 +18,6 @@ const info = {
   card_exp: "08/24"
 }
 
-const generatePurchaseDetail = (i: number) => {
-  return (
-    <tr>
-      <td>{productDetail[i].name}</td>
-      <td>{productDetail[i].desc}</td>
-      <td>${productDetail[i].price}</td>
-      <td>{faker.random.numeric()}</td>
-    </tr>
-  )
-}
 
 export default function ViewConfirmation() {
   return (
@@ -40,40 +30,26 @@ export default function ViewConfirmation() {
       <div className={"row"}>
         <div className={"col"}>
           <h2>Your Orders</h2>
-          <table className={"table"}>
-            <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Disc</th>
-              <th scope="col">Price</th>
-              <th scope="col">Quantity</th>
-            </tr>
-            </thead>
-            <tbody>
-            {generatePurchaseDetail(1)}
-            {generatePurchaseDetail(3)}
-            </tbody>
-          </table>
+          {generateTable()}
         </div>
       </div>
 
       <div className={"row"}>
-        <div className={"col"}>
+        <div className={"col-12 col-md-6"}>
           <h2>Shipping Address</h2>
           <div>
-            <p className={"pb-2"}>{info.first_name} {info.last_name}</p>
-            <p className={"pb-2"}>{info.addr_1}</p>
-            <p className={"pb-2"}>{info.addr_2}</p>
+            <p>{info.first_name} {info.last_name}</p>
+            <p>{info.addr_1}</p>
+            <p>{info.addr_2}</p>
           </div>
         </div>
 
-        <div className={"pb-2"}>
-          <h2>Payment Information</h2>
-          <div>
-            <p className={"pb-2"}>{info.first_name} {info.last_name}</p>
-            <p
-              className={"pb-2"}>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
-            <p className={"pb-2"}>{info.card_exp}</p>
+        <div className={"col-12 col-md-6"}>
+          <div className={"col"}>
+            <h2>Payment Information</h2>
+            <p>{info.first_name} {info.last_name}</p>
+            <p>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
+            <p>{info.card_exp}</p>
           </div>
         </div>
       </div>
