@@ -5,8 +5,8 @@ const generateOrderDetail = (i: number) => {
   return (
     <tr>
       <td>{productDetail[i].name}</td>
-    <td>${productDetail[i].price}</td>
-    <td>{faker.random.numeric()}</td>
+      <td>${productDetail[i].price}</td>
+      <td>{faker.random.numeric()}</td>
     </tr>
   )
 }
