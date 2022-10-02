@@ -9,7 +9,10 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "bootstrap": "^5.2.1",
     "json-loader": "^0.5.7",
+    "react-bootstrap": "^2.5.0",
     "umi": "^4.0.19"
   },
   "devDependencies": {

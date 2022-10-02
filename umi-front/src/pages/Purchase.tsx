@@ -9,9 +9,10 @@ export default function Purchase() {
   const onAdd = (e: number, i: number) => {
     alert("Adding " + e + " of product " + productDetail[i].name)
   }
-  
+
   const generateRow = (i: number) => {
     return (
+      <tbody>
       <tr>
         <td>{productDetail[i].name}</td>
         <td>{productDetail[i].desc}</td>
@@ -25,6 +26,7 @@ export default function Purchase() {
           <button type="button" form="my_form" onClick={(e) => onAdd(order.quantity[i], i)}>add</button>
         </td>
       </tr>
+      </tbody>
     )
   }
 
@@ -33,6 +35,7 @@ export default function Purchase() {
       <form method="GET" id="my_form"></form>
 
       <table>
+        <thead>
         <tr>
           <th>Name</th>
           <th>Disc</th>
@@ -40,6 +43,7 @@ export default function Purchase() {
           <th>Quantity</th>
           <th>Action</th>
         </tr>
+        </thead>
         {generateRow(0)}
         {generateRow(1)}
         {generateRow(2)}
