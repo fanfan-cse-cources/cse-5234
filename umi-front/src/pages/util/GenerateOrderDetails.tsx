@@ -1,5 +1,6 @@
 import productDetail from "@/pages/data/productDetail.json";
 import {faker} from "@faker-js/faker";
+import {Table} from "react-bootstrap";
 
 const generateOrderDetail = (i: number) => {
   return (
@@ -13,18 +14,18 @@ const generateOrderDetail = (i: number) => {
 
 export const generateTable = () => {
   return (
-    <table className={"table"}>
+    <Table>
       <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Quantity</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
       </tr>
       </thead>
       <tbody>
       {generateOrderDetail(1)}
       {generateOrderDetail(3)}
       </tbody>
-    </table>
+    </Table>
   )
 }

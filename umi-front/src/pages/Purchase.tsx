@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import productDetail from "./data/productDetail.json"
 
 export default function Purchase() {
@@ -15,14 +16,17 @@ export default function Purchase() {
       <tr>
         <td>{productDetail[i].name}</td>
         <td>{productDetail[i].desc}</td>
-        <td>${productDetail[i].price}</td>
+        <td>{"$" + productDetail[i].price}</td>
         <td>
-          <input type="number" name="quantity" form="my_form" onChange={(e) => {
+          <select name={"item_" + i} className={"form-control"} form="my_form" onChange={(e) => {
             order.quantity[i] = Number(e.target.value)
-          }}/>
-        </td>
-        <td>
-          <button type="button" form="my_form" onClick={(e) => onAdd(order.quantity[i], i)}>add</button>
+          }}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
         </td>
       </tr>
       </tbody>
@@ -30,26 +34,39 @@ export default function Purchase() {
   }
 
   return (
-    <div>
-      <form method="GET" id="my_form"></form>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col lg="2"></Col>
+        <Col lg="8">
+          <h1>Select Your Order</h1>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
 
-      <table>
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Disc</th>
-          <th>Price</th>
-          <th>Quantity</th>
-          <th>Action</th>
-        </tr>
-        </thead>
-        {generateRow(0)}
-        {generateRow(1)}
-        {generateRow(2)}
-        {generateRow(3)}
-        {generateRow(4)}
-      </table>
-    </div>
+      <Row>
+        <Col lg="2"></Col>
+        <Col lg="8">
+          <Form method="GET" id="my_form">
+            <Table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Disc</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+              </thead>
+              {generateRow(0)}
+              {generateRow(1)}
+              {generateRow(2)}
+              {generateRow(3)}
+              {generateRow(4)}
+            </Table>
+          </Form>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
+    </Container>
   );
 }
   

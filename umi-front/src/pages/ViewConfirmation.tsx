@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 import {generateTable} from "./util/GenerateOrderDetails"
 import {faker} from "@faker-js/faker";
+import {Col, Container, Row} from "react-bootstrap";
 
 const info = {
   order_id: faker.random.numeric(),
@@ -19,47 +20,52 @@ const info = {
 
 export default function ViewConfirmation() {
   return (
-    <div className={"row p-5"}>
-      <div className={"col-md-2"}></div>
-      <div className={"col-12 col-md-8"}>
-        <h1>Confirmation</h1>
-        <Alert variant='success' className={"col p-3"}>
-          Your order #{info.order_id} has been confirmed, {info.first_name}.
-        </Alert>
-      </div>
-      <div className={"col-md-2"}></div>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col lg="2"></Col>
+        <Col lg="8">
+          <h1>Confirmation</h1>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
 
-      <div className={"row"}>
-        <div className={"col-md-2"}></div>
-        <div className={"col-12 col-md-8"}>
+      <Row className="justify-content-md-center">
+        <Col lg="2"></Col>
+        <Col lg="8">
+          <Alert variant='success'>
+            Your order #{info.order_id} has been confirmed, {info.first_name}.
+          </Alert>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
+
+      <Row>
+        <Col lg="2"></Col>
+        <Col lg="8">
           <h2>Your Orders</h2>
           {generateTable()}
-        </div>
-        <div className={"col-md-2"}></div>
-      </div>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
 
-      <div className={"row"}>
-        <div className={"col-md-2"}></div>
-        <div className={"col-12 col-md-4"}>
+      <Row>
+        <Col lg="2"></Col>
+        <Col lg="4">
           <h2>Shipping Address</h2>
-          <div>
-            <p>{info.first_name} {info.last_name}</p>
-            <p>{info.addr_1}</p>
-            <p>{info.addr_2}</p>
-          </div>
-        </div>
+          <p>{info.first_name} {info.last_name}</p>
+          <p>{info.addr_1}</p>
+          <p>{info.addr_2}</p>
+        </Col>
 
-        <div className={"col-12 col-md-4"}>
-          <div className={"col"}>
-            <h2>Payment Information</h2>
-            <p>{info.first_name} {info.last_name}</p>
-            <p>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
-            <p>{info.card_exp}</p>
-          </div>
-        </div>
-      </div>
-      <div className={"col-md-2"}></div>
-    </div>
+        <Col lg="4">
+          <h2>Payment Information</h2>
+          <p>{info.first_name} {info.last_name}</p>
+          <p>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
+          <p>{info.card_exp}</p>
+        </Col>
+        <Col lg="2"></Col>
+      </Row>
+    </Container>
   );
 }
   

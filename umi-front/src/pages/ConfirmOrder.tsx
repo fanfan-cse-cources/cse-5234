@@ -1,87 +1,103 @@
 import {generateTable} from "./util/GenerateOrderDetails"
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
 export default function ConfirmOrder() {
   return (
-    <div className={"row p-5"}>
-      <div className={"col-md-2"}></div>
-      <div className={"col-12 col-md-8"}>
-        <h1>Payment</h1>
-      </div>
-      <div className={"col-md-2"}></div>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col lg="1"></Col>
+        <Col lg="10">
+          <h1>Make Your Payment</h1>
+        </Col>
+        <Col lg="1"></Col>
+      </Row>
 
-      <div className={"col-md-2"}></div>
-      <div className={"col-12 col-md-4"}>
-        <h2>Details</h2>
-        {generateTable()}
-      </div>
+      <Row>
+        <Col lg="1"></Col>
+        <Col lg="10">
+          <h2>Details</h2>
+          {generateTable()}
+        </Col>
+        <Col lg="1"></Col>
+      </Row>
 
-      <div className={"col-12 col-md-4"}>
-        <h2>Delivery</h2>
-        <form>
-          <div className={"form-group pb-2"}>
-            <label htmlFor="recipient">Recipient</label>
-            <input type="text" className={"form-control"} id="recipient" aria-describedby="recipient"/>
-          </div>
+      <Row>
+        <Col lg="1"></Col>
+        <Col lg="5">
+          <h2>Delivery</h2>
+          <Form as={Row}>
+            <Form.Group className="mb-3" controlId="recipient">
+              <Form.Label>Recipient</Form.Label>
+              <Form.Control type="text" placeholder="John Doe" />
+            </Form.Group>
 
-          <div className={"form-group pb-2"}>
-            <label htmlFor="addr_1">Address 1</label>
-            <input type="text" className={"form-control"} id="addr_1" aria-describedby="addr_1"/>
-          </div>
+            <Form.Group className="mb-3" controlId="addr_1">
+              <Form.Label>Address 1</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
 
-          <div className={"form-group pb-2"}>
-            <label htmlFor="addr_2">Address 2</label>
-            <input type="text" className={"form-control"} id="addr_2" aria-describedby="addr_2"/>
-          </div>
+            <Form.Group className="mb-3" controlId="addr_2">
+              <Form.Label>Address 2</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
 
-          <div className={"row"}>
-            <div className={"col-6 form-group pb-2"}>
-              <label htmlFor="city">City</label>
-              <input type="text" className={"form-control"} id="city"/>
-            </div>
+            <Col lg="6">
+              <Form.Group className="mb-3" controlId="state">
+                <Form.Label>State</Form.Label>
+                <Form.Control type="text" />
+              </Form.Group>
+            </Col>
 
-            <div className={"col-6 form-group pb-2"}>
-              <label htmlFor="state">State</label>
-              <input type="text" className={"form-control"} id="state"/>
-            </div>
-          </div>
+            <Col lg="6">
+              <Form.Group className="mb-3" controlId="zip">
+                <Form.Label>Zip Code</Form.Label>
+                <Form.Control type="text" />
+              </Form.Group>
+            </Col>
+          </Form>
+        </Col>
 
-          <div className={"form-group pb-2"}>
-            <label htmlFor="zip">Zip Code</label>
-            <input type="text" className={"form-control"} id="zip" aria-describedby="zip"/>
-          </div>
-
+        <Col lg="5">
           <h2>Payment</h2>
-          <div className={"form-group pb-2"}>
-            <label htmlFor="CardNumber">Card Number</label>
-            <input type="text" className={"form-control"} id="cardNumber" aria-describedby="cardHelp"/>
-            <small id="cardHelp" className={"form-text text-muted"}>We'll never share your card information with anyone
-              else.</small>
-          </div>
+          <Form as={Row}>
+            <Form.Group className="mb-3" controlId="cardholder">
+              <Form.Label>Name on Card</Form.Label>
+              <Form.Control type="text" placeholder="John Doe" />
+            </Form.Group>
 
-          <div className={"form-group pb-2"}>
-            <label htmlFor="CardholderName">Cardholder Name</label>
-            <input type="text" className={"form-control"} id="cardName"/>
-          </div>
+            <Form.Group className="mb-3" controlId="cardnumber">
+              <Form.Label>Card Number</Form.Label>
+              <Form.Control type="text" />
+            </Form.Group>
 
-          <div className={"row"}>
-            <div className={"col-6 form-group pb-2"}>
-              <label htmlFor="CVV">CVV</label>
-              <input type="password" className={"form-control"} id="CVV"/>
-            </div>
+            <Col lg="6">
+              <Form.Group className="mb-3" controlId="cvv">
+                <Form.Label>CVV</Form.Label>
+                <Form.Control type="password" />
+              </Form.Group>
+            </Col>
 
-            <div className={"col-6 form-group pb-2"}>
-              <label htmlFor="Exp Date">Exp Date</label>
-              <input type="text" className={"form-control"} id="expDate" placeholder="mm/yy"/>
-            </div>
-          </div>
+            <Col lg="6">
+              <Form.Group className="mb-3" controlId="expdate">
+                <Form.Label>Exp Date</Form.Label>
+                <Form.Control type="text" />
+              </Form.Group>
+            </Col>
+          </Form>
+        </Col>
+        <Col lg="1"></Col>
+      </Row>
 
-          <div className={"row pb-2"}>
-            <button type="submit" className={"btn btn-primary"}>Submit</button>
-          </div>
-        </form>
-      </div>
-      <div className={"col-md-2"}></div>
-    </div>
+      <Row>
+        <Col lg="1"></Col>
+        <Col lg="10" className="d-grid gap-2">
+          <Button variant="primary">
+            Confirm Order
+          </Button>
+        </Col>
+        <Col lg="1"></Col>
+      </Row>
+    </Container>
   );
 }
   
