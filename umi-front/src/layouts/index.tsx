@@ -1,13 +1,13 @@
 import { Link, Outlet } from 'umi';
 import styles from './index.less';
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Col, Container, Nav, Navbar, Image, Row} from "react-bootstrap";
 
 export default function Layout() {
   return (
     <>
       <Navbar bg="light" expand="md">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img
               src={require('../assets/logo.png')}
               width="35"
@@ -20,12 +20,15 @@ export default function Layout() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/purchase">Purchase</Nav.Link>
-              <Nav.Link href="/purchase/viewOrder">View Orders</Nav.Link>
+              <Nav.Link href="/purchase">Order Now</Nav.Link>
+              <Nav.Link href="/purchase/viewOrder">View Recent Order</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <Image src={require('../assets/banner.png')} fluid />
+
       <Outlet />
     </>
   );
