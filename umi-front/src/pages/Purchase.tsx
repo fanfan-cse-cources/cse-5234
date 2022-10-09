@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
+import {Col, Container, Form, Row, Table} from "react-bootstrap";
 import productDetail from "./data/productDetail.json"
 
 export default function Purchase() {

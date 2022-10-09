@@ -1,7 +1,6 @@
 import {generateTable} from "@/pages/util/GenerateOrderDetails";
 import {faker} from "@faker-js/faker";
 import {Col, Container, Row} from "react-bootstrap";
-import Alert from "react-bootstrap/Alert";
 
 const generateAllOrders = () => {
   return (

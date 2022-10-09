@@ -1,6 +1,5 @@
-import { Link, Outlet } from 'umi';
-import styles from './index.less';
-import {Col, Container, Nav, Navbar, Image, Row} from "react-bootstrap";
+import {Outlet} from 'umi';
+import {Container, Image, Nav, Navbar} from "react-bootstrap";
 
 export default function Layout() {
   return (
