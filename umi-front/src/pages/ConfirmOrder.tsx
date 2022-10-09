@@ -28,30 +28,30 @@ export default function ConfirmOrder() {
           <Form as={Row}>
             <Form.Group className={"mb-3"} controlId="recipient">
               <Form.Label>Recipient</Form.Label>
-              <Form.Control type="text" placeholder="John Doe" />
+              <Form.Control type="text" placeholder="John Doe"/>
             </Form.Group>
 
             <Form.Group className={"mb-3"} controlId="addr_1">
               <Form.Label>Address 1</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text"/>
             </Form.Group>
 
             <Form.Group className={"mb-3"} controlId="addr_2">
               <Form.Label>Address 2</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text"/>
             </Form.Group>
 
             <Col lg="6">
               <Form.Group className={"mb-3"} controlId="state">
                 <Form.Label>State</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text"/>
               </Form.Group>
             </Col>
 
             <Col lg="6">
               <Form.Group className={"mb-3"} controlId="zip">
                 <Form.Label>Zip Code</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text"/>
               </Form.Group>
             </Col>
           </Form>
@@ -62,25 +62,25 @@ export default function ConfirmOrder() {
           <Form as={Row}>
             <Form.Group className={"mb-3"} controlId="cardholder">
               <Form.Label>Name on Card</Form.Label>
-              <Form.Control type="text" placeholder="John Doe" />
+              <Form.Control type="text" placeholder="John Doe"/>
             </Form.Group>
 
             <Form.Group className={"mb-3"} controlId="cardnumber">
               <Form.Label>Card Number</Form.Label>
-              <Form.Control type="text" />
+              <Form.Control type="text"/>
             </Form.Group>
 
             <Col lg="6">
               <Form.Group className={"mb-3"} controlId="cvv">
                 <Form.Label>CVV</Form.Label>
-                <Form.Control type="password" />
+                <Form.Control type="password"/>
               </Form.Group>
             </Col>
 
             <Col lg="6">
               <Form.Group className={"mb-3"} controlId="expdate">
                 <Form.Label>Exp Date</Form.Label>
-                <Form.Control type="text" />
+                <Form.Control type="text"/>
               </Form.Group>
             </Col>
           </Form>

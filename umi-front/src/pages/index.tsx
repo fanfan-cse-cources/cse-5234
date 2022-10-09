@@ -1,5 +1,6 @@
 import React from "react"
-import {Col, Container, Row} from "react-bootstrap";
+import {Card, Col, Container, Row} from "react-bootstrap";
+import productDetail from "@/pages/data/productDetail.json";
 
 export default function HomePage() {
   return (
@@ -12,15 +13,28 @@ export default function HomePage() {
         <Col lg="1"></Col>
       </Row>
 
-      <Row className={"justify-content-md-center mt-3"}>
-        <Col lg="1"></Col>
-        <Col lg="10">
-
-        </Col>
-        <Col lg="1"></Col>
-      </Row>
+      <div className="m-test-wrap mt-3">
+        <Row md={3} className="g-2">
+          {productDetail.map((_, index) => {
+            return (
+              <Col key={index}>
+                <Card>
+                  <Card.Img variant="top" src="#"/>
+                  <Card.Body>
+                    <Card.Title>{productDetail[index].name}</Card.Title>
+                    <Card.Text>
+                      {productDetail[index].desc}
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">{"$" + productDetail[index].price}</small>
+                  </Card.Footer>
+                </Card>
+              </Col>
+            )
+          })}
+        </Row>
+      </div>
     </Container>
   );
 }
-
-

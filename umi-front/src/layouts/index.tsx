@@ -15,7 +15,7 @@ export default function Layout() {
               alt="React Bootstrap logo"
             />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
@@ -26,9 +26,9 @@ export default function Layout() {
         </Container>
       </Navbar>
 
-      <Image src={require('../assets/banner.png')} fluid />
+      <Image src={require('../assets/banner.png')} fluid/>
 
-      <Outlet />
+      <Outlet/>
     </>
   );
 }
