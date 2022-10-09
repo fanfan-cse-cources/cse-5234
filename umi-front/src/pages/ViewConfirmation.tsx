@@ -21,49 +21,49 @@ const info = {
 export default function ViewConfirmation() {
   return (
     <Container>
-      <Row className="justify-content-md-center">
-        <Col lg="2"></Col>
-        <Col lg="8">
+      <Row className={"justify-content-md-center mt-5"}>
+        <Col lg="1"></Col>
+        <Col lg="10">
           <h1>Confirmation</h1>
         </Col>
-        <Col lg="2"></Col>
+        <Col lg="1"></Col>
       </Row>
 
-      <Row className="justify-content-md-center">
-        <Col lg="2"></Col>
-        <Col lg="8">
+      <Row className={"justify-content-md-center mt-3"}>
+        <Col lg="1"></Col>
+        <Col lg="10">
           <Alert variant='success'>
             Your order #{info.order_id} has been confirmed, {info.first_name}.
           </Alert>
         </Col>
-        <Col lg="2"></Col>
+        <Col lg="1"></Col>
       </Row>
 
-      <Row>
-        <Col lg="2"></Col>
-        <Col lg="8">
+      <Row className={"justify-content-md-center mt-3"}>
+        <Col lg="1"></Col>
+        <Col lg="10">
           <h2>Your Orders</h2>
           {generateTable()}
         </Col>
-        <Col lg="2"></Col>
+        <Col lg="1"></Col>
       </Row>
 
-      <Row>
-        <Col lg="2"></Col>
-        <Col lg="4">
+      <Row className={"justify-content-md-center mt-3"}>
+        <Col lg="1"></Col>
+        <Col lg="5">
           <h2>Shipping Address</h2>
           <p>{info.first_name} {info.last_name}</p>
           <p>{info.addr_1}</p>
           <p>{info.addr_2}</p>
         </Col>
 
-        <Col lg="4">
+        <Col lg="5">
           <h2>Payment Information</h2>
           <p>{info.first_name} {info.last_name}</p>
           <p>{info.card_issuer.charAt(0).toUpperCase() + info.card_issuer.slice(1)} {info.card_number}</p>
           <p>{info.card_exp}</p>
         </Col>
-        <Col lg="2"></Col>
+        <Col lg="1"></Col>
       </Row>
     </Container>
   );
