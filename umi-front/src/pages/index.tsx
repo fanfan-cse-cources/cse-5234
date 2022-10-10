@@ -1,6 +1,8 @@
 import React from "react"
 import {Card, Col, Container, Row} from "react-bootstrap";
 import productDetail from "@/pages/data/productDetail.json";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default function HomePage() {
   return (
@@ -19,7 +21,7 @@ export default function HomePage() {
             return (
               <Col key={index}>
                 <Card>
-                  <Card.Img variant="top" src="#"/>
+                  <Card.Img variant="top" src="#" />
                   <Card.Body>
                     <Card.Title>{productDetail[index].name}</Card.Title>
                     <Card.Text>

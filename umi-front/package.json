@@ -13,7 +13,8 @@
     "bootstrap": "^5.2.1",
     "json-loader": "^0.5.7",
     "react-bootstrap": "^2.5.0",
-    "umi": "^4.0.19"
+    "umi": "^4.0.19",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@types/react": "^18.0.21",
