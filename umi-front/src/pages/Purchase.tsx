@@ -3,9 +3,11 @@ import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import productDetail from "./data/productDetail.json"
 
 export default function Purchase() {
-  const [order, setOrder] = useState({
-    quantity: Array.from(Array(productDetail.length).keys())
-  })
+  let items: { [index: string]: number; } = {};
+
+  const onSubmit = () => {
+    console.log(items)
+  }
 
   return (
     <Container>
@@ -32,14 +34,14 @@ export default function Purchase() {
               </thead>
               {productDetail.map((_, index) => {
                 return (
-                  <tbody>
+                  <tbody key={index}>
                   <tr>
                     <td>{productDetail[index].name}</td>
                     <td>{productDetail[index].desc}</td>
                     <td>{"$" + productDetail[index].price}</td>
                     <td>
                       <select name={"item_" + index} className={"form-control"} form="my_form" onChange={(e) => {
-                        order.quantity[index] = Number(e.target.value)
+                        items[productDetail[index].name] = Number(e.target.value)
                       }}>
                         <option>0</option>
                         <option>1</option>
@@ -61,7 +63,7 @@ export default function Purchase() {
       <Row>
         <Col lg="1"></Col>
         <Col lg="10" className={"d-grid gap-2"}>
-          <Button variant="primary">
+          <Button variant="primary" onClick={onSubmit}>
             Confirm Order
           </Button>
         </Col>
