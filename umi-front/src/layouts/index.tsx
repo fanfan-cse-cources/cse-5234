@@ -12,7 +12,7 @@ export default function Layout() {
               width="35"
               height="35"
               className="d-inline-block align-top"
-              alt="React Bootstrap logo"
+              alt="Dragon's Wok Logo"
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
@@ -26,7 +26,7 @@ export default function Layout() {
         </Container>
       </Navbar>
 
-      <Image src={require('../assets/banner.png')} fluid/>
+      <Image src={require('../assets/banner.png')} width="100%" />
 
       <Outlet/>
     </>

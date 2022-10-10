@@ -41,6 +41,7 @@ export default function Purchase() {
                       <select name={"item_" + index} className={"form-control"} form="my_form" onChange={(e) => {
                         order.quantity[index] = Number(e.target.value)
                       }}>
+                        <option>0</option>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
