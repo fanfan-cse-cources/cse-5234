@@ -1,7 +1,11 @@
 import {generateTable} from "./util/GenerateOrderDetails"
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import { history } from 'umi';
 
 export default function ConfirmOrder() {
+  function finishOrder(){
+    history.push('/purchase/viewConfirmation');
+  }
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
@@ -91,7 +95,7 @@ export default function ConfirmOrder() {
       <Row>
         <Col lg="1"></Col>
         <Col lg="10" className={"d-grid gap-2"}>
-          <Button variant="primary">
+          <Button variant="primary" onClick={finishOrder}>
             Confirm Order
           </Button>
         </Col>

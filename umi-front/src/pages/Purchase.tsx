@@ -1,12 +1,16 @@
 import {useState} from "react";
 import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import productDetail from "./data/productDetail.json"
+import { history } from 'umi';
 
 export default function Purchase() {
   let items: { [index: string]: number; } = {};
 
   const onSubmit = () => {
+
     console.log(items)
+    history.push('/purchase/confirmOrder');
+
   }
 
   return (
