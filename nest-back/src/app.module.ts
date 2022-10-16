@@ -3,16 +3,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PurchaseController } from './purchase/purchase.controller';
-import { OrderModule } from './order/order.module';
+import { InventoryManagementController } from './inventory-management/inventory-management.controller';
 import { ItemModule } from './item/item.module';
-import { PaymentInfoModule } from './payment-info/payment-info.module';
-import { ShippingInfoModule } from './shipping-info/shipping-info.module';
 import { Item } from './entities/Item';
 import { ItemService } from './item/item.service';
 import { Order } from './entities/Order';
 import { PaymentInfo } from './entities/PaymentInfo';
 import { ShippingInfo } from './entities/ShippingInfo';
+import { OrderProcessingController } from './order-processing/order-processing.controller';
+import { OrderService } from './order/order.service';
+import { PaymentInfoModule } from './payment-info/payment-info.module';
+import { ShippingInfoModule } from './shipping-info/shipping-info.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -28,12 +30,16 @@ import { ShippingInfo } from './entities/ShippingInfo';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Item, Order, PaymentInfo, ShippingInfo]),
-    OrderModule,
     ItemModule,
     PaymentInfoModule,
     ShippingInfoModule,
+    OrderModule,
   ],
-  controllers: [AppController, PurchaseController],
-  providers: [AppService, ItemService],
+  controllers: [
+    AppController,
+    InventoryManagementController,
+    OrderProcessingController,
+  ],
+  providers: [AppService, ItemService, OrderService],
 })
 export class AppModule {}

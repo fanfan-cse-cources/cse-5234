@@ -1,17 +1,17 @@
 import { IsNotEmpty, IsNumberString } from 'class-validator';
 
-export class ItemDto {
+export class PaymentDTO {
   @IsNotEmpty()
-  name: string;
+  cardNum: string;
 
   @IsNotEmpty()
-  description: string;
+  expDate: string;
+
+  @IsNotEmpty()
+  cardName: string;
 
   @IsNotEmpty()
   @IsNumberString()
-  price: number;
-
-  @IsNotEmpty()
-  @IsNumberString()
-  quantity: number;
+  paymentId: number;
+  cvv: number;
 }
