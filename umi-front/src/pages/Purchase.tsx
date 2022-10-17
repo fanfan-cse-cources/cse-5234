@@ -1,10 +1,21 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
-import productDetail from "./data/productDetail.json"
-import { history } from 'umi';
+import {history} from 'umi';
 
 export default function Purchase() {
   let items: { [index: string]: number; } = {};
+
+  const [productDetail, setName] = useState([]);
+
+  useEffect(()=>{
+    getProductDetails().then(r => console.log('Retrieved the inventory from API'))
+  }, [])
+
+  const getProductDetails = async () => {
+    const response = await fetch('http://localhost:3000/inventory-management/inventory/')
+
+    setName(await response.json())
+  }
 
   const onSubmit = () => {
 
@@ -40,12 +51,12 @@ export default function Purchase() {
                 return (
                   <tbody key={index}>
                   <tr>
-                    <td>{productDetail[index].name}</td>
-                    <td>{productDetail[index].desc}</td>
-                    <td>{"$" + productDetail[index].price}</td>
+                    <td>{productDetail[index]['name']}</td>
+                    <td>{productDetail[index]['description']}</td>
+                    <td>{"$" + productDetail[index]['price']}</td>
                     <td>
                       <select name={"item_" + index} className={"form-control"} form="my_form" onChange={(e) => {
-                        items[productDetail[index].name] = Number(e.target.value)
+                        items[productDetail[index]['name']] = Number(e.target.value)
                       }}>
                         <option>0</option>
                         <option>1</option>

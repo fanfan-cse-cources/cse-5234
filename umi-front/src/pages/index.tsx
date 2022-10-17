@@ -1,10 +1,25 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import {Card, Col, Container, Row} from "react-bootstrap";
-import productDetail from "@/pages/data/productDetail.json";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import request from "umi-request";
 
 export default function HomePage() {
+  const [productDetail, setProductDetail] = useState([]);
+
+  useEffect(()=>{
+    getProductDetails().then()
+  }, [])
+
+  const getProductDetails = async () => {
+    request
+      .get('http://localhost:3000/inventory-management/inventory/')
+      .then(async function (response) {
+        setProductDetail(await response)
+      })
+      .catch(function(error) {
+        console.log('Unable to retrieve data from API');
+      });
+  }
+
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
@@ -16,20 +31,20 @@ export default function HomePage() {
       </Row>
 
       <div className="m-test-wrap mt-3">
-        <Row md={3} className="g-2">
+        <Row sm={1} md={3} className="g-2">
           {productDetail.map((_, index) => {
             return (
               <Col key={index}>
                 <Card>
                   <Card.Img variant="top" src="#" />
                   <Card.Body>
-                    <Card.Title>{productDetail[index].name}</Card.Title>
+                    <Card.Title>{productDetail[index]['name']}</Card.Title>
                     <Card.Text>
-                      {productDetail[index].desc}
+                      {productDetail[index]['description']}
                     </Card.Text>
                   </Card.Body>
                   <Card.Footer>
-                    <small className="text-muted">{"$" + productDetail[index].price}</small>
+                    <small className="text-muted">{"$" + productDetail[index]['price']}</small>
                   </Card.Footer>
                 </Card>
               </Col>
