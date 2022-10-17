@@ -9,7 +9,7 @@ import { Item } from './entities/Item';
 import { ItemService } from './item/item.service';
 import { Order } from './entities/Order';
 import { PaymentInfo } from './entities/PaymentInfo';
-import { ShippingInfo } from './entities/ShippingInfo';
+import { AddressInfo } from './entities/AddressInfo';
 import { OrderProcessingController } from './order-processing/order-processing.controller';
 import { OrderService } from './order/order.service';
 import { PaymentInfoModule } from './payment-info/payment-info.module';
@@ -29,7 +29,7 @@ import { OrderModule } from './order/order.module';
       entities: ['./entities/*.ts'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Item, Order, PaymentInfo, ShippingInfo]),
+    TypeOrmModule.forFeature([Item, Order, PaymentInfo, AddressInfo]),
     ItemModule,
     PaymentInfoModule,
     ShippingInfoModule,

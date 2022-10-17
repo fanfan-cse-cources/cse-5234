@@ -20,14 +20,14 @@ export class InventoryManagementController {
     return this.itemService.getAllItem();
   }
 
-  @Get('items/:id')
+  @Get('inventory/item/:id')
   public async findOne(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<ItemDTO> {
     return await this.itemService.findOne(id);
   }
 
-  @Post('add_product')
+  @Post('inventory/item')
   @UsePipes(ValidationPipe)
   public async CreateProducts(@Body() itemDto: ItemDTO) {
     await this.itemService.create(itemDto);

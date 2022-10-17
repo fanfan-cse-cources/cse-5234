@@ -1,8 +1,19 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './Order';
+import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Entity('ShippingInfo', { schema: 'dev' })
-export class ShippingInfo {
+@Entity('AddressInfos', { schema: 'dev' })
+export class AddressInfo {
+  public build(addressDto: PlaceOrderDTO) {
+    this.addr_1 = addressDto.addr_1;
+    this.addr_2 = addressDto.addr_2 === undefined ? '' : addressDto.addr_2;
+    this.city = addressDto.city;
+    this.state = addressDto.state;
+    this.zip = addressDto.zip;
+    this.name = addressDto.name;
+    return this;
+  }
+
   @PrimaryGeneratedColumn({ type: 'int', name: 'address_id', unsigned: true })
   addressId: number;
 
@@ -24,6 +35,6 @@ export class ShippingInfo {
   @Column('tinytext', { name: 'zip' })
   zip: string;
 
-  @OneToMany(() => Order, (order) => order.address)
+  @OneToMany(() => Order, (orders) => orders.address)
   orders: Order[];
 }

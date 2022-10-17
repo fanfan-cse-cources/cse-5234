@@ -1,47 +1,43 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
-  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { PaymentInfo } from './PaymentInfo';
-import { ShippingInfo } from './ShippingInfo';
+import { AddressInfo } from './AddressInfo';
+import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Index('address_id', ['addressId'], {})
-@Index('payment_id', ['paymentId'], {})
-@Entity('Order', { schema: 'dev' })
+@Entity('Orders', { schema: 'dev' })
 export class Order {
+  public build(orderDto: PlaceOrderDTO) {
+    this.listOfItems = JSON.stringify(orderDto.list_of_items);
+    return this;
+  }
+
   @PrimaryGeneratedColumn({ type: 'int', name: 'order_id', unsigned: true })
   orderId: number;
-
-  @Column('date', { name: 'date' })
-  date: string;
 
   @Column('double', { name: 'total_price' })
   totalPrice: number;
 
-  @Column('text', { name: 'item_ids' })
-  itemIds: string;
+  @Column('text', { name: 'list_of_items' })
+  listOfItems: string;
 
-  @Column('int', { name: 'payment_id', unsigned: true })
-  paymentId: number;
+  @CreateDateColumn()
+  created_at: Date;
 
-  @Column('int', { name: 'address_id', unsigned: true })
-  addressId: number;
+  @UpdateDateColumn()
+  updated_at: Date;
 
-  @ManyToOne(() => PaymentInfo, (paymentInfo) => paymentInfo.orders, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-  })
-  @JoinColumn([{ name: 'payment_id', referencedColumnName: 'paymentId' }])
+  @ManyToOne(() => PaymentInfo, (info) => info.orders)
+  @JoinColumn({ name: 'paymentId' })
   payment: PaymentInfo;
 
-  @ManyToOne(() => ShippingInfo, (shippingInfo) => shippingInfo.orders, {
-    onDelete: 'NO ACTION',
-    onUpdate: 'NO ACTION',
-  })
-  @JoinColumn([{ name: 'address_id', referencedColumnName: 'addressId' }])
-  address: ShippingInfo;
+  @ManyToOne(() => AddressInfo, (info) => info.orders)
+  @JoinColumn({ name: 'addressId' })
+  address: AddressInfo;
 }

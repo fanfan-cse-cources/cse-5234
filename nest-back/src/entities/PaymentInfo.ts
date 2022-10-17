@@ -1,8 +1,17 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './Order';
+import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Entity('PaymentInfo', { schema: 'dev' })
+@Entity('PaymentInfos', { schema: 'dev' })
 export class PaymentInfo {
+  public build(orderDto: PlaceOrderDTO) {
+    this.cardName = orderDto.card_name;
+    this.cardNum = orderDto.card_num;
+    this.cvv = orderDto.cvv;
+    this.expDate = orderDto.exp_date;
+    return this;
+  }
+
   @PrimaryGeneratedColumn({ type: 'int', name: 'payment_id', unsigned: true })
   paymentId: number;
 
@@ -18,6 +27,6 @@ export class PaymentInfo {
   @Column('text', { name: 'card_name' })
   cardName: string;
 
-  @OneToMany(() => Order, (order) => order.payment)
+  @OneToMany(() => Order, (orders) => orders.payment)
   orders: Order[];
 }
