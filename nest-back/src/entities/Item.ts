@@ -17,6 +17,9 @@ export class Item {
   @Column('text', { name: 'description' })
   description: string;
 
+  @Column('text', { name: 'image' })
+  image: string;
+
   @Column('double', { name: 'price' })
   price: number;
 
