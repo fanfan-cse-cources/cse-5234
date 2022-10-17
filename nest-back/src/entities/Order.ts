@@ -27,12 +27,6 @@ export class Order {
   @Column('text', { name: 'list_of_items' })
   listOfItems: string;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
-
   @ManyToOne(() => PaymentInfo, (info) => info.orders)
   @JoinColumn({ name: 'paymentId' })
   payment: PaymentInfo;
@@ -40,4 +34,10 @@ export class Order {
   @ManyToOne(() => AddressInfo, (info) => info.orders)
   @JoinColumn({ name: 'addressId' })
   address: AddressInfo;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

@@ -6,11 +6,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-
-export interface Item {
-  id: number;
-  quantity: number;
-}
+import { Item } from '../typings/Item';
 
 @ValidatorConstraint({ name: 'itemList', async: false })
 export class CustomItemList implements ValidatorConstraintInterface {
@@ -27,7 +23,7 @@ export class CustomItemList implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return 'invalid item list';
+    return 'Invalid item list';
   }
 }
 

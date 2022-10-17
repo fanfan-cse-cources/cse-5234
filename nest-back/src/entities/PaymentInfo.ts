@@ -1,4 +1,11 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Order } from './Order';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
@@ -29,4 +36,10 @@ export class PaymentInfo {
 
   @OneToMany(() => Order, (orders) => orders.payment)
   orders: Order[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
