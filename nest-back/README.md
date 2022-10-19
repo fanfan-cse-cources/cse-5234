@@ -34,7 +34,6 @@
 $ brew install mysql
 $ brew services restart mysql
 $ mysql_secure_installation
-$ mysql -u root -p <database_name> < db/schema.sql
 ```
 
 ## Installation
