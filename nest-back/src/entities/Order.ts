@@ -11,7 +11,7 @@ import { PaymentInfo } from './PaymentInfo';
 import { AddressInfo } from './AddressInfo';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Entity('Orders', { schema: 'dev' })
+@Entity('Orders', { schema: 'db_order' })
 export class Order {
   public build(orderDto: PlaceOrderDTO) {
     this.listOfItems = JSON.stringify(orderDto.list_of_items);

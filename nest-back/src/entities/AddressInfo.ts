@@ -9,7 +9,7 @@ import {
 import { Order } from './Order';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Entity('AddressInfos', { schema: 'dev' })
+@Entity('AddressInfos', { schema: 'db_order' })
 export class AddressInfo {
   public build(addressDto: PlaceOrderDTO) {
     this.addr_1 = addressDto.addr_1;

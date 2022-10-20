@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { AppDataSource } from '../index';
+import { AppDataSource_INVENTORY, AppDataSource_ORDER } from '../index';
 import { Order } from '../entities/Order';
 import { AddressInfo } from '../entities/AddressInfo';
 import { PaymentInfo } from '../entities/PaymentInfo';
@@ -14,9 +14,9 @@ import {
 @Injectable()
 export class OrderService {
   async create(placeOrderDTO: PlaceOrderDTO) {
-    const paymentRepository = AppDataSource.getRepository(PaymentInfo);
-    const addressRepository = AppDataSource.getRepository(AddressInfo);
-    const itemRepository = AppDataSource.getRepository(Item);
+    const paymentRepository = AppDataSource_ORDER.getRepository(PaymentInfo);
+    const addressRepository = AppDataSource_ORDER.getRepository(AddressInfo);
+    const itemRepository = AppDataSource_INVENTORY.getRepository(Item);
 
     const addressInfo = await addressRepository.findOne({
       where: [
@@ -110,19 +110,21 @@ export class OrderService {
 
     let orderSavedInfo;
     try {
-      await AppDataSource.transaction(async (transactionalEntityManager) => {
-        for (const item of await transactionalEntityManager.find(Item, {
-          where: {
-            itemId: In(itemIdList),
-          },
-        })) {
-          item.quantity -= placeOrderDTO.list_of_items.find(
-            (j) => j.id === item.itemId,
-          ).quantity;
-          await transactionalEntityManager.save(item);
-        }
-        orderSavedInfo = await transactionalEntityManager.save(orderInfo);
-      });
+      await AppDataSource_ORDER.transaction(
+        async (transactionalEntityManager) => {
+          for (const item of await transactionalEntityManager.find(Item, {
+            where: {
+              itemId: In(itemIdList),
+            },
+          })) {
+            item.quantity -= placeOrderDTO.list_of_items.find(
+              (j) => j.id === item.itemId,
+            ).quantity;
+            await transactionalEntityManager.save(item);
+          }
+          orderSavedInfo = await transactionalEntityManager.save(orderInfo);
+        },
+      );
     } catch (e) {
       throw e;
     }

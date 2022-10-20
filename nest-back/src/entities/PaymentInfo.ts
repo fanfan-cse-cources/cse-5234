@@ -9,7 +9,7 @@ import {
 import { Order } from './Order';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 
-@Entity('PaymentInfos', { schema: 'dev' })
+@Entity('PaymentInfos', { schema: 'db_order' })
 export class PaymentInfo {
   public build(orderDto: PlaceOrderDTO) {
     this.cardName = orderDto.card_name;

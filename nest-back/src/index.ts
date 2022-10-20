@@ -8,14 +8,26 @@ import { AddressInfo } from './entities/AddressInfo';
 
 ConfigModule.forRoot();
 
-export const AppDataSource = new DataSource({
+export const AppDataSource_ORDER = new DataSource({
   type: 'mysql',
   host: process.env.DATABASE_HOST,
   port: Number(process.env.DATABASE_PORT),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_NAME,
-  entities: [Item, Order, PaymentInfo, AddressInfo],
+  database: process.env.DATABASE_NAME_ORDERS,
+  entities: [Order, PaymentInfo, AddressInfo],
+  synchronize: true,
+  logging: true,
+});
+
+export const AppDataSource_INVENTORY = new DataSource({
+  type: 'mysql',
+  host: process.env.DATABASE_HOST,
+  port: Number(process.env.DATABASE_PORT),
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME_INVENTORY,
+  entities: [Item],
   synchronize: true,
   logging: true,
 });
@@ -23,9 +35,12 @@ export const AppDataSource = new DataSource({
 // to initialize initial connection with the database, register all entities
 // and "synchronize" database schema, call "initialize()" method of a newly created database
 // once in your application bootstrap
-AppDataSource.initialize()
-  .then(() => {
-    // here you can start to work with your database
-    console.log(`[main] process running`);
-  })
-  .catch((error) => console.log(error));
+(async () => {
+  try {
+    await AppDataSource_INVENTORY.initialize();
+    await AppDataSource_ORDER.initialize();
+  } catch (e) {
+    console.error(e);
+  }
+  console.log(`[main] process running`);
+})();

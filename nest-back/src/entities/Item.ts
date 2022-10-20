@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('Items', { schema: 'dev' })
+@Entity('Items', { schema: 'db_inventory' })
 export class Item {
   @PrimaryGeneratedColumn({ type: 'int', name: 'item_id', unsigned: true })
   itemId: number;
