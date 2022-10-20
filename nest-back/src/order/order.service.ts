@@ -17,6 +17,7 @@ export class OrderService {
     const paymentRepository = AppDataSource_ORDER.getRepository(PaymentInfo);
     const addressRepository = AppDataSource_ORDER.getRepository(AddressInfo);
     const itemRepository = AppDataSource_INVENTORY.getRepository(Item);
+    const orderRepository = AppDataSource_ORDER.getRepository(Order);
 
     const addressInfo = await addressRepository.findOne({
       where: [
@@ -108,26 +109,17 @@ export class OrderService {
     }
     orderInfo.totalPrice = totalPrice;
 
-    let orderSavedInfo;
-    try {
-      await AppDataSource_ORDER.transaction(
-        async (transactionalEntityManager) => {
-          for (const item of await transactionalEntityManager.find(Item, {
-            where: {
-              itemId: In(itemIdList),
-            },
-          })) {
-            item.quantity -= placeOrderDTO.list_of_items.find(
-              (j) => j.id === item.itemId,
-            ).quantity;
-            await transactionalEntityManager.save(item);
-          }
-          orderSavedInfo = await transactionalEntityManager.save(orderInfo);
-        },
-      );
-    } catch (e) {
-      throw e;
+    for (const item of await itemRepository.find({
+      where: {
+        itemId: In(itemIdList),
+      },
+    })) {
+      item.quantity -= placeOrderDTO.list_of_items.find(
+        (j) => j.id === item.itemId,
+      ).quantity;
+      await itemRepository.save(item);
     }
+    const orderSavedInfo = await orderRepository.save(orderInfo);
 
     return JSON.stringify({
       message: 'created',
