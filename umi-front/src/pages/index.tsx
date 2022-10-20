@@ -36,7 +36,7 @@ export default function HomePage() {
             return (
               <Col key={index}>
                 <Card>
-                  <Card.Img variant="top" src="#" />
+                  <Card.Img variant="top" src={productDetail[index]['image']} />
                   <Card.Body>
                     <Card.Title>{productDetail[index]['name']}</Card.Title>
                     <Card.Text>
