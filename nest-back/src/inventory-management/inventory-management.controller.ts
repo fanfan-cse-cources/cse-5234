@@ -27,9 +27,9 @@ export class InventoryManagementController {
     return await this.itemService.findOne(id);
   }
 
-  @Post('inventory/item')
+  @Post('inventory/item/new')
   @UsePipes(ValidationPipe)
   public async CreateProducts(@Body() itemDto: ItemDTO) {
-    await this.itemService.create(itemDto);
+    return await this.itemService.create(itemDto);
   }
 }

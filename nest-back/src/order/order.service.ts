@@ -109,21 +109,33 @@ export class OrderService {
     }
     orderInfo.totalPrice = totalPrice;
 
-    for (const item of await itemRepository.find({
-      where: {
-        itemId: In(itemIdList),
-      },
-    })) {
-      item.quantity -= placeOrderDTO.list_of_items.find(
-        (j) => j.id === item.itemId,
-      ).quantity;
-      await itemRepository.save(item);
-    }
-    const orderSavedInfo = await orderRepository.save(orderInfo);
+    let orderSavedInfo;
+    await (async () => {
+      try {
+        for (const item of await itemRepository.find({
+          where: {
+            itemId: In(itemIdList),
+          },
+        })) {
+          item.quantity -= placeOrderDTO.list_of_items.find(
+            (j) => j.id === item.itemId,
+          ).quantity;
+          await itemRepository.save(item);
+        }
+        orderSavedInfo = await orderRepository.save(orderInfo);
+      } catch (e) {
+        throw e;
+      }
+    });
 
     return JSON.stringify({
       message: 'created',
-      orderId: orderSavedInfo.orderId,
+      order: orderSavedInfo,
+      address: addressSavedInfo,
+      payment: {
+        cardNum: paymentInfo.cardNum,
+        cardName: paymentInfo.cardName,
+      },
     } as PlaceOrderSuccessMessage);
   }
 }

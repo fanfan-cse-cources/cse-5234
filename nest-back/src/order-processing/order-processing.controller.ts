@@ -12,7 +12,7 @@ import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 export class OrderProcessingController {
   constructor(private orderService: OrderService) {}
 
-  @Post('order')
+  @Post('order/new')
   @UsePipes(ValidationPipe)
   public async CreateOrders(@Body() placeOrderDTO: PlaceOrderDTO) {
     return await this.orderService.create(placeOrderDTO);
