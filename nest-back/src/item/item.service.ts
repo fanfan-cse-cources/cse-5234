@@ -23,6 +23,6 @@ export class ItemService {
 
   async findOne(id: number) {
     const itemRepository = AppDataSource_INVENTORY.getRepository(Item);
-    return await itemRepository.findOne({ where: [{ itemId: id }] });
+    return await itemRepository.findOne({ where: [{ item_id: id }] });
   }
 }

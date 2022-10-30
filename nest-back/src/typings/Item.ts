@@ -1,4 +1,4 @@
 export interface Item {
-  id: number;
+  item_id: number;
   quantity: number;
 }

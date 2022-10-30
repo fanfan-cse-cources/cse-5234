@@ -14,18 +14,21 @@ import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 @Entity('Orders', { schema: 'db_order' })
 export class Order {
   public build(orderDto: PlaceOrderDTO) {
-    this.listOfItems = JSON.stringify(orderDto.list_of_items);
+    this.line_items = JSON.stringify(orderDto.line_items);
     return this;
   }
 
   @PrimaryGeneratedColumn({ type: 'int', name: 'order_id', unsigned: true })
-  orderId: number;
+  order_id: number;
 
   @Column('double', { name: 'total_price' })
-  totalPrice: number;
+  total_price: number;
 
-  @Column('text', { name: 'list_of_items' })
-  listOfItems: string;
+  @Column('text', { name: 'line_items' })
+  line_items: string;
+
+  @Column('text', { name: 'status' })
+  status: string;
 
   @ManyToOne(() => PaymentInfo, (info) => info.orders)
   @JoinColumn({ name: 'paymentId' })
@@ -36,8 +39,8 @@ export class Order {
   address: AddressInfo;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }

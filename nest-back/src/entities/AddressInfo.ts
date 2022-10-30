@@ -22,7 +22,7 @@ export class AddressInfo {
   }
 
   @PrimaryGeneratedColumn({ type: 'int', name: 'address_id', unsigned: true })
-  addressId: number;
+  address_id: number;
 
   @Column('text', { name: 'name' })
   name: string;
@@ -46,8 +46,8 @@ export class AddressInfo {
   orders: Order[];
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }

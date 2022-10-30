@@ -44,8 +44,9 @@ export class OrderService {
     const paymentInfo = await paymentRepository.findOne({
       where: [
         {
-          cardNum: placeOrderDTO.card_num,
-          expDate: placeOrderDTO.exp_date,
+          number: placeOrderDTO.number,
+          exp_month: placeOrderDTO.exp_month,
+          exp_year: placeOrderDTO.exp_year,
           cvv: placeOrderDTO.cvv,
         },
       ],
@@ -68,10 +69,10 @@ export class OrderService {
     orderInfo.address = addressSavedInfo;
 
     // retrieve required items
-    const itemIdList = placeOrderDTO.list_of_items.map((i) => i.id);
+    const itemIdList = placeOrderDTO.line_items.map((i) => i.item_id);
     const items = await itemRepository.find({
       where: {
-        itemId: In(itemIdList),
+        item_id: In(itemIdList),
       },
     });
     if (items.length !== itemIdList.length) {
@@ -88,7 +89,7 @@ export class OrderService {
     for (const i of items) {
       if (
         i.quantity <
-        placeOrderDTO.list_of_items.find((j) => j.id === i.itemId).quantity
+        placeOrderDTO.line_items.find((j) => j.item_id === i.item_id).quantity
       ) {
         throw new HttpException(
           JSON.stringify({
@@ -105,36 +106,49 @@ export class OrderService {
     for (const i of items) {
       totalPrice +=
         i.price *
-        placeOrderDTO.list_of_items.find((j) => j.id === i.itemId).quantity;
+        placeOrderDTO.line_items.find((j) => j.item_id === i.item_id).quantity;
     }
-    orderInfo.totalPrice = totalPrice;
+    orderInfo.total_price = totalPrice;
 
-    let orderSavedInfo;
-    await (async () => {
-      try {
-        for (const item of await itemRepository.find({
-          where: {
-            itemId: In(itemIdList),
-          },
-        })) {
-          item.quantity -= placeOrderDTO.list_of_items.find(
-            (j) => j.id === item.itemId,
-          ).quantity;
-          await itemRepository.save(item);
-        }
-        orderSavedInfo = await orderRepository.save(orderInfo);
-      } catch (e) {
-        throw e;
-      }
-    });
+    orderInfo.status = 'new';
+
+    const orderSavedInfo = await orderRepository.save(orderInfo);
+
+    // await (async () => {
+    //   try {
+    //     for (const item of await itemRepository.find({
+    //       where: {
+    //         itemId: In(itemIdList),
+    //       },
+    //     })) {
+    //       item.quantity -= placeOrderDTO.list_of_items.find(
+    //         (j) => j.id === item.itemId,
+    //       ).quantity;
+    //       await itemRepository.save(item);
+    //     }
+    //     orderSavedInfo = await orderRepository.save(orderInfo);
+    //   } catch (e) {
+    //     throw e;
+    //   }
+    // });
 
     return JSON.stringify({
       message: 'created',
-      order: orderSavedInfo,
-      address: addressSavedInfo,
+      order: {
+        order_id: orderSavedInfo.order_id,
+        status: orderSavedInfo.status,
+      },
+      address: {
+        name: addressSavedInfo.name,
+        addr_1: addressSavedInfo.addr_1,
+        addr_2: addressSavedInfo.addr_2,
+        city: addressSavedInfo.city,
+        state: addressSavedInfo.state,
+        zip: addressSavedInfo.zip,
+      },
       payment: {
-        cardNum: paymentInfo.cardNum,
-        cardName: paymentInfo.cardName,
+        number: paymentInfo.number,
+        name: paymentInfo.card_name,
       },
     } as PlaceOrderSuccessMessage);
   }

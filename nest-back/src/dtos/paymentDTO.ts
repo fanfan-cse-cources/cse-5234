@@ -1,17 +1,25 @@
 import { IsNotEmpty, IsNumberString } from 'class-validator';
 
-export class paymentDTO {
+export class PaymentDTO {
   @IsNotEmpty()
-  cardNum: string;
+  number: string;
 
   @IsNotEmpty()
-  expDate: string;
+  @IsNumberString()
+  exp_month: number;
+
+  @IsNotEmpty()
+  @IsNumberString()
+  exp_year: number;
 
   @IsNotEmpty()
   cardName: string;
 
   @IsNotEmpty()
   @IsNumberString()
-  paymentId: number;
+  payment_id: number;
+
+  @IsNotEmpty()
+  @IsNumberString()
   cvv: number;
 }

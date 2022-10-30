@@ -6,12 +6,12 @@ export class OrderDTO {
 
   @IsNotEmpty()
   @IsNumberString()
-  paymentId: number;
+  payment_id: number;
 
   @IsNotEmpty()
   @IsNumberString()
-  addressId: number;
+  address_id: number;
 
   @IsNotEmpty()
-  listOfItems: string;
+  line_items: string;
 }

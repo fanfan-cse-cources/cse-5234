@@ -9,7 +9,7 @@ import {
 @Entity('Items', { schema: 'db_inventory' })
 export class Item {
   @PrimaryGeneratedColumn({ type: 'int', name: 'item_id', unsigned: true })
-  itemId: number;
+  item_id: number;
 
   @Column('text', { name: 'name' })
   name: string;
@@ -27,8 +27,8 @@ export class Item {
   quantity: number;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }

@@ -12,34 +12,39 @@ import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 @Entity('PaymentInfos', { schema: 'db_order' })
 export class PaymentInfo {
   public build(orderDto: PlaceOrderDTO) {
-    this.cardName = orderDto.card_name;
-    this.cardNum = orderDto.card_num;
+    this.card_name = orderDto.card_name;
+    this.number = orderDto.number;
     this.cvv = orderDto.cvv;
-    this.expDate = orderDto.exp_date;
+    this.exp_month = orderDto.exp_month;
+    this.exp_year = orderDto.exp_year;
+
     return this;
   }
 
   @PrimaryGeneratedColumn({ type: 'int', name: 'payment_id', unsigned: true })
-  paymentId: number;
+  payment_id: number;
 
   @Column('text', { name: 'card_num' })
-  cardNum: string;
+  number: string;
 
-  @Column('tinytext', { name: 'exp_date' })
-  expDate: string;
+  @Column('int', { name: 'exp_date', unsigned: true })
+  exp_month: number;
+
+  @Column('int', { name: 'exp_year', unsigned: true })
+  exp_year: number;
 
   @Column('int', { name: 'cvv', unsigned: true })
   cvv: number;
 
   @Column('text', { name: 'card_name' })
-  cardName: string;
+  card_name: string;
 
   @OneToMany(() => Order, (orders) => orders.payment)
   orders: Order[];
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }

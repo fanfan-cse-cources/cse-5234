@@ -8,14 +8,14 @@ import {
 } from 'class-validator';
 import { Item } from '../typings/Item';
 
-@ValidatorConstraint({ name: 'itemList', async: false })
+@ValidatorConstraint({ name: 'line_items', async: false })
 export class CustomItemList implements ValidatorConstraintInterface {
   validate(text: any, args: ValidationArguments) {
     if (!Array.isArray(args.value)) {
       return false;
     }
     for (const i of args.value) {
-      if (!('id' in i) || !('quantity' in i)) {
+      if (!('item_id' in i) || !('quantity' in i)) {
         return false;
       }
     }
@@ -23,13 +23,13 @@ export class CustomItemList implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments) {
-    return 'Invalid item list';
+    return 'Invalid line items';
   }
 }
 
 export class PlaceOrderDTO {
   @Validate(CustomItemList)
-  list_of_items: Array<Item>;
+  line_items: Array<Item>;
 
   @IsNotEmpty()
   name: string;
@@ -49,10 +49,13 @@ export class PlaceOrderDTO {
   zip: string;
 
   @IsNotEmpty()
-  card_num: string;
+  number: string;
 
   @IsNotEmpty()
-  exp_date: string;
+  exp_month: number;
+
+  @IsNotEmpty()
+  exp_year: number;
 
   @IsNotEmpty()
   @IsNumberString()

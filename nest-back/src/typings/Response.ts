@@ -1,5 +1,3 @@
-import { Order } from '../entities/Order';
-import { AddressInfo } from '../entities/AddressInfo';
 import { Item } from '../entities/Item';
 
 export interface MessageBase {
@@ -7,11 +5,21 @@ export interface MessageBase {
 }
 
 export interface PlaceOrderSuccessMessage extends MessageBase {
-  order: Order;
-  address: AddressInfo;
+  order: {
+    order_id: number;
+    status: string;
+  };
+  address: {
+    name: string;
+    addr_1: string;
+    addr_2: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
   payment: {
-    cardNum: string;
-    cardName: string;
+    number: string;
+    name: string;
   };
 }
 
