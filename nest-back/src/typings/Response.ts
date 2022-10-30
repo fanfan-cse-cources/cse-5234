@@ -18,7 +18,7 @@ export interface PlaceOrderSuccessMessage extends MessageBase {
     zip: string;
   };
   payment: {
-    number: string;
+    card_last_four: string;
     name: string;
   };
 }

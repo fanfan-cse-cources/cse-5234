@@ -147,7 +147,7 @@ export class OrderService {
         zip: addressSavedInfo.zip,
       },
       payment: {
-        number: paymentInfo.number,
+        card_last_four: paymentInfo.number.slice(-4),
         name: paymentInfo.card_name,
       },
     } as PlaceOrderSuccessMessage);
