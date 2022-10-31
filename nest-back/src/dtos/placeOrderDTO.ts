@@ -1,12 +1,16 @@
 import {
+  IsInt,
   IsNotEmpty,
   IsNumberString,
+  Max,
+  Min,
   Validate,
   ValidationArguments,
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Item } from '../typings/Item';
+import { Type } from 'class-transformer';
 
 @ValidatorConstraint({ name: 'line_items', async: false })
 export class CustomItemList implements ValidatorConstraintInterface {
@@ -49,12 +53,19 @@ export class PlaceOrderDTO {
   zip: string;
 
   @IsNotEmpty()
+  @IsNumberString()
   number: string;
 
   @IsNotEmpty()
+  @IsInt()
+  @Min(1)
+  @Max(12)
+  @Type(() => Number)
   exp_month: number;
 
   @IsNotEmpty()
+  @IsInt()
+  @Type(() => Number)
   exp_year: number;
 
   @IsNotEmpty()
