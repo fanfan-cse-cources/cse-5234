@@ -3,7 +3,7 @@ import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import {history} from 'umi';
 
 export default function Purchase() {
-  let items: { [index: string]: number; } = {};
+  let items = {};
 
   const [productDetail, setName] = useState([]);
 
@@ -18,9 +18,8 @@ export default function Purchase() {
   }
 
   const onSubmit = () => {
-
     console.log(items)
-    history.push('/purchase/confirmOrder');
+    history.push('/purchase/confirmOrder', { state: items })
 
   }
 
@@ -56,7 +55,7 @@ export default function Purchase() {
                     <td>{"$" + productDetail[index]['price']}</td>
                     <td>
                       <select name={"item_" + index} className={"form-control"} form="my_form" onChange={(e) => {
-                        items[productDetail[index]['name']] = Number(e.target.value)
+                        items[index] = {name: productDetail[index]['name'],price:productDetail[index]['price'],quantity:Number(e.target.value)}
                       }}>
                         <option>0</option>
                         <option>1</option>

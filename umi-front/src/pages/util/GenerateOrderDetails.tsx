@@ -2,17 +2,17 @@ import productDetail from "@/pages/data/productDetail.json";
 import {faker} from "@faker-js/faker";
 import {Table} from "react-bootstrap";
 
-const generateOrderDetail = (i: number) => {
+const generateOrderDetail = (orderdetails,i: number) => {
   return (
     <tr>
-      <td>{productDetail[i].name}</td>
-      <td>${productDetail[i].price}</td>
-      <td>{faker.random.numeric()}</td>
+      <td>{orderdetails[i].name}</td>
+      <td>${orderdetails[i].price}</td>
+      <td>{orderdetails[i].quantity}</td>
     </tr>
   )
 }
 
-export const generateTable = () => {
+export const generateTable = (orderdetails) => {
   return (
     <Table>
       <thead>
@@ -23,8 +23,11 @@ export const generateTable = () => {
       </tr>
       </thead>
       <tbody>
-      {generateOrderDetail(1)}
-      {generateOrderDetail(3)}
+      {/* {for (var i=0;i<orderdetails.length;i+=1){
+generateOrderDetail(orderdetails,index)
+      } 
+      } */}
+      {generateOrderDetail(orderdetails,0)}
       </tbody>
     </Table>
   )
