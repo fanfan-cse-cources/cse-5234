@@ -52,6 +52,22 @@ export class OrderService {
       ],
     });
 
+    const current_year = new Date().getFullYear();
+    const current_month = new Date().getMonth() + 1;
+    if (
+      placeOrderDTO.exp_year < current_year ||
+      (placeOrderDTO.exp_year == current_year &&
+        placeOrderDTO.exp_month < current_month)
+    ) {
+      throw new HttpException(
+        JSON.stringify({
+          message: 'bad request',
+          reason: 'invalid card expiration date',
+        } as PlaceOrderFailedMessage),
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     let paymentSavedInfo: PaymentInfo;
     if (!paymentInfo) {
       const paymentInfo = new PaymentInfo().build(placeOrderDTO);
