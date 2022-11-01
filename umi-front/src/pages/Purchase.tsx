@@ -7,7 +7,7 @@ export default function Purchase() {
 
   const [productDetail, setName] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getProductDetails().then(r => console.log('Retrieved the inventory from API'))
   }, [])
 
@@ -17,8 +17,8 @@ export default function Purchase() {
   }
 
   const onSubmit = () => {
-    
-    history.push('/purchase/confirmOrder', { state: items })
+
+    history.push('/purchase/confirmOrder', {state: items})
 
   }
 
@@ -54,7 +54,12 @@ export default function Purchase() {
                     <td>{"$" + productDetail[index]['price']}</td>
                     <td>
                       <select name={"item_" + index} className={"form-control"} form="my_form" onChange={(e) => {
-                        items.push({item_id:productDetail[index]['item_id'],name:productDetail[index]['name'],price:productDetail[index]['price'],quantity:Number(e.target.value)}) 
+                        items.push({
+                          item_id: productDetail[index]['item_id'],
+                          name: productDetail[index]['name'],
+                          price: productDetail[index]['price'],
+                          quantity: Number(e.target.value)
+                        })
                       }}>
                         <option>0</option>
                         <option>1</option>

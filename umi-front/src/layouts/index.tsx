@@ -26,7 +26,7 @@ export default function Layout() {
         </Container>
       </Navbar>
 
-      <Image src={require('../assets/banner.png')} width="100%" />
+      <Image src={require('../assets/banner.png')} width="100%"/>
 
       <Outlet/>
     </>

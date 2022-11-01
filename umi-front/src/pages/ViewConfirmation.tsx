@@ -1,19 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
-import {generateTable} from "./util/GenerateOrderDetails"
-import {faker} from "@faker-js/faker";
 import {Col, Container, Row} from "react-bootstrap";
 import {useLocation} from "umi"
 
 
 export default function ViewConfirmation() {
-  
-  const location=useLocation()
-  const data=location.state
+
+  const location = useLocation()
+  const data = location.state
   console.log(data)
-  const address=data.address
-  const card=data.payment
-  const order=data.order
+  const address = data.address
+  const card = data.payment
+  const order = data.order
   const info = {
     // order:order,
     order_id: order.order_id,
@@ -23,7 +21,7 @@ export default function ViewConfirmation() {
     city: address.city,
     state: address.state,
     zip: address.zip,
-    card_last_four:card.card_last_four,
+    card_last_four: card.card_last_four,
     card_name: card.card_name,
     // order_id: faker.random.numeric(),
     // first_name: faker.name.firstName(),

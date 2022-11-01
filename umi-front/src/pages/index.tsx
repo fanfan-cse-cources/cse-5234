@@ -5,7 +5,7 @@ import request from "umi-request";
 export default function HomePage() {
   const [productDetail, setProductDetail] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getProductDetails().then()
   }, [])
 
@@ -15,7 +15,7 @@ export default function HomePage() {
       .then(async function (response) {
         setProductDetail(await response)
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log('Unable to retrieve data from API');
       });
   }
@@ -36,7 +36,7 @@ export default function HomePage() {
             return (
               <Col key={index}>
                 <Card>
-                  <Card.Img variant="top" src={productDetail[index]['image']} />
+                  <Card.Img variant="top" src={productDetail[index]['image']}/>
                   <Card.Body>
                     <Card.Title>{productDetail[index]['name']}</Card.Title>
                     <Card.Text>

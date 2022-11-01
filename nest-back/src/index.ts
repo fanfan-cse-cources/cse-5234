@@ -16,7 +16,7 @@ export const AppDataSource_ORDER = new DataSource({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME_ORDERS,
   entities: [Order, PaymentInfo, AddressInfo],
-  synchronize: false,
+  synchronize: true,
   logging: true,
 });
 
@@ -28,7 +28,7 @@ export const AppDataSource_INVENTORY = new DataSource({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME_INVENTORY,
   entities: [Item],
-  synchronize: false,
+  synchronize: true,
   logging: true,
 });
 
