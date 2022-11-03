@@ -41,17 +41,6 @@ export class OrderService {
       addressSavedInfo = addressInfo;
     }
 
-    const paymentInfo = await paymentRepository.findOne({
-      where: [
-        {
-          number: placeOrderDTO.number,
-          exp_month: placeOrderDTO.exp_month,
-          exp_year: placeOrderDTO.exp_year,
-          cvv: placeOrderDTO.cvv,
-        },
-      ],
-    });
-
     const current_year = new Date().getFullYear();
     const current_month = new Date().getMonth() + 1;
     if (
@@ -67,6 +56,17 @@ export class OrderService {
         HttpStatus.BAD_REQUEST,
       );
     }
+
+    const paymentInfo = await paymentRepository.findOne({
+      where: [
+        {
+          number: placeOrderDTO.number,
+          exp_month: placeOrderDTO.exp_month,
+          exp_year: placeOrderDTO.exp_year,
+          cvv: placeOrderDTO.cvv,
+        },
+      ],
+    });
 
     let paymentSavedInfo: PaymentInfo;
     if (!paymentInfo) {
@@ -163,8 +163,8 @@ export class OrderService {
         zip: addressSavedInfo.zip,
       },
       payment: {
-        card_last_four: paymentInfo.number.slice(-4),
-        name: paymentInfo.card_name,
+        card_last_four: paymentSavedInfo.number.slice(-4),
+        name: paymentSavedInfo.card_name,
       },
     } as PlaceOrderSuccessMessage);
   }

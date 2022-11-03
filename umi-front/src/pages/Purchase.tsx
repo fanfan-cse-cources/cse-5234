@@ -2,8 +2,15 @@ import {useEffect, useState} from "react";
 import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import {history} from 'umi';
 
+export interface Item {
+  item_id: number;
+  name: string;
+  price: string;
+  quantity: number;
+}
+
 export default function Purchase() {
-  let items = [];
+  let items: Item[] = [];
 
   const [productDetail, setName] = useState([]);
 
@@ -17,9 +24,7 @@ export default function Purchase() {
   }
 
   const onSubmit = () => {
-
     history.push('/purchase/confirmOrder', {state: items})
-
   }
 
   return (

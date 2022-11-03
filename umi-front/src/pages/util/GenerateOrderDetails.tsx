@@ -1,19 +1,25 @@
 import {Table} from "react-bootstrap";
 
-const generateOrderDetail = (orderdetail, i: number) => {
-  console.log(orderdetail)
+export interface Item {
+  item_id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+const generateOrderDetail = (orderDetail: Item, i: number) => {
   return (
     <tr>
-      <td>{orderdetail.name}</td>
-      <td>${orderdetail.price}</td>
-      <td>{orderdetail.quantity}</td>
+      <td>{orderDetail.name}</td>
+      <td>${orderDetail.price}</td>
+      <td>{orderDetail.quantity}</td>
     </tr>
   )
 }
 
-export const generateTable = (orderdetails) => {
+export const generateTable = (orderDetails: Item[]) => {
   console.log("generate tables")
-  console.log(orderdetails)
+  console.log(orderDetails)
   return (
     <Table>
       <thead>
@@ -24,11 +30,9 @@ export const generateTable = (orderdetails) => {
       </tr>
       </thead>
       <tbody>
-      {orderdetails.map(function (orderdetails, i) {
-        return generateOrderDetail(orderdetails, i)
+      {orderDetails.map(function (orderDetail: any, i: number) {
+        return generateOrderDetail(orderDetail, i)
       })}
-
-
       </tbody>
     </Table>
   )
