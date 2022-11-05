@@ -13,7 +13,7 @@ export class PaymentDTO {
   exp_year: number;
 
   @IsNotEmpty()
-  cardName: string;
+  card_name: string;
 
   @IsNotEmpty()
   @IsNumberString()

@@ -15,6 +15,11 @@ import { OrderService } from './order/order.service';
 import { PaymentInfoModule } from './payment-info/payment-info.module';
 import { ShippingInfoModule } from './shipping-info/shipping-info.module';
 import { OrderModule } from './order/order.module';
+import { ShipmentProcessingController } from './shipment-processing/shipment-processing.controller';
+import { PaymentProcessingController } from './payment-processing/payment-processing.controller';
+import { PaymentService } from './payment/payment.service';
+import { ShipmentService } from './shipment/shipment.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -44,12 +49,21 @@ import { OrderModule } from './order/order.module';
     PaymentInfoModule,
     ShippingInfoModule,
     OrderModule,
+    HttpModule,
   ],
   controllers: [
     AppController,
     InventoryManagementController,
     OrderProcessingController,
+    ShipmentProcessingController,
+    PaymentProcessingController,
   ],
-  providers: [AppService, ItemService, OrderService],
+  providers: [
+    AppService,
+    ItemService,
+    OrderService,
+    PaymentService,
+    ShipmentService,
+  ],
 })
 export class AppModule {}

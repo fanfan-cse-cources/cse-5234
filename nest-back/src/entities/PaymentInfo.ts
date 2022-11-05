@@ -8,10 +8,11 @@ import {
 } from 'typeorm';
 import { Order } from './Order';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
+import { PaymentDTO } from '../dtos/paymentDTO';
 
 @Entity('PaymentInfos', { schema: 'db_order' })
 export class PaymentInfo {
-  public build(orderDto: PlaceOrderDTO) {
+  public build(orderDto: PlaceOrderDTO | PaymentDTO) {
     this.card_name = orderDto.card_name;
     this.number = orderDto.number;
     this.cvv = orderDto.cvv;

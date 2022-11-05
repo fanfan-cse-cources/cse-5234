@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AppDataSource_INVENTORY, AppDataSource_ORDER } from '../index';
 import { Order } from '../entities/Order';
 import { AddressInfo } from '../entities/AddressInfo';
-import { PaymentInfo } from '../entities/PaymentInfo';
 import { PlaceOrderDTO } from '../dtos/placeOrderDTO';
 import { Item } from '../entities/Item';
 import { In } from 'typeorm';
@@ -10,11 +9,15 @@ import {
   PlaceOrderFailedMessage,
   PlaceOrderSuccessMessage,
 } from '../typings/Response';
+import { HttpService } from '@nestjs/axios';
+import { PaymentInfo } from '../entities/PaymentInfo';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class OrderService {
+  constructor(private readonly httpService: HttpService) {}
+
   async create(placeOrderDTO: PlaceOrderDTO) {
-    const paymentRepository = AppDataSource_ORDER.getRepository(PaymentInfo);
     const addressRepository = AppDataSource_ORDER.getRepository(AddressInfo);
     const itemRepository = AppDataSource_INVENTORY.getRepository(Item);
     const orderRepository = AppDataSource_ORDER.getRepository(Order);
@@ -41,44 +44,20 @@ export class OrderService {
       addressSavedInfo = addressInfo;
     }
 
-    const current_year = new Date().getFullYear();
-    const current_month = new Date().getMonth() + 1;
-    if (
-      placeOrderDTO.exp_year < current_year ||
-      (placeOrderDTO.exp_year == current_year &&
-        placeOrderDTO.exp_month < current_month)
-    ) {
-      throw new HttpException(
-        JSON.stringify({
-          message: 'bad request',
-          reason: 'invalid card expiration date',
-        } as PlaceOrderFailedMessage),
-        HttpStatus.BAD_REQUEST,
-      );
-    }
-
-    const paymentInfo = await paymentRepository.findOne({
-      where: [
+    const paymentDTO = new PaymentInfo().build(placeOrderDTO);
+    const res = await firstValueFrom(
+      this.httpService.post(
+        'http://localhost:3000/payment-processing/credit-card/payment/new',
+        JSON.stringify(paymentDTO),
         {
-          number: placeOrderDTO.number,
-          exp_month: placeOrderDTO.exp_month,
-          exp_year: placeOrderDTO.exp_year,
-          cvv: placeOrderDTO.cvv,
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
-      ],
-    });
+      ),
+    );
 
-    let paymentSavedInfo: PaymentInfo;
-    if (!paymentInfo) {
-      const paymentInfo = new PaymentInfo().build(placeOrderDTO);
-      try {
-        paymentSavedInfo = await paymentRepository.save(paymentInfo);
-      } catch (e) {
-        throw e;
-      }
-    } else {
-      paymentSavedInfo = paymentInfo;
-    }
+    const paymentSavedInfo: PaymentInfo = res.data.payment;
 
     const orderInfo = new Order().build(placeOrderDTO);
     orderInfo.payment = paymentSavedInfo;
