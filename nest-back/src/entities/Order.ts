@@ -30,14 +30,14 @@ export class Order {
   @Column('text', { name: 'status' })
   status: string;
 
-  @ManyToOne(() => PaymentInfo, (info) => info.orders)
+  @ManyToOne(() => PaymentInfo, (info) => info.orders, { eager: false })
   @JoinColumn({ name: 'payment_id' })
   payment: PaymentInfo;
 
   @Column('text', { name: 'payment_confirmation', nullable: true })
   payment_confirm: string;
 
-  @ManyToOne(() => AddressInfo, (info) => info.orders)
+  @ManyToOne(() => AddressInfo, (info) => info.orders, { eager: true })
   @JoinColumn({ name: 'address_id' })
   address: AddressInfo;
 
