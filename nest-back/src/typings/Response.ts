@@ -8,6 +8,7 @@ export interface MessageBase {
 export interface PlaceOrderSuccessMessage extends MessageBase {
   order: {
     order_id: number;
+    line_items: string;
     status: string;
   };
   address: {

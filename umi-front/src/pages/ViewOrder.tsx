@@ -1,10 +1,9 @@
-import {faker} from "@faker-js/faker";
 import {Col, Container, Row} from "react-bootstrap";
 
 const generateAllOrders = () => {
   return (
     <div>
-      <h2>Order #{faker.random.numeric()}</h2>
+      <h2>Order #{}</h2>
       {/*{generateTable()}*/}
     </div>
   )

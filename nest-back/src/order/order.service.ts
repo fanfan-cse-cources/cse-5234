@@ -133,6 +133,7 @@ export class OrderService {
       message: 'created',
       order: {
         order_id: orderSavedInfo.order_id,
+        line_items: orderSavedInfo.line_items,
         status: orderSavedInfo.status,
       },
       address: {
