@@ -44,25 +44,8 @@ export class OrderService {
       addressSavedInfo = addressInfo;
     }
 
-    const paymentDTO = new PaymentInfo().build(placeOrderDTO);
-    const paymentRes = await firstValueFrom(
-      this.httpService.post(
-        'http://localhost:3000/payment-processing/credit-card/payment/new',
-        JSON.stringify(paymentDTO),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      ),
-    );
-
-    const paymentSavedInfo: PaymentInfo = paymentRes.data.payment;
-
     const orderInfo = new Order().build(placeOrderDTO);
-    orderInfo.payment = paymentSavedInfo;
     orderInfo.address = addressSavedInfo;
-    orderInfo.payment_confirm = paymentRes.data.confirmation;
 
     // retrieve required items
     const itemIdList = placeOrderDTO.line_items.map((i) => i.item_id);
@@ -108,7 +91,43 @@ export class OrderService {
 
     orderInfo.status = 'new';
 
-    const orderSavedInfo = await orderRepository.save(orderInfo);
+    let orderSavedInfo = await orderRepository.save(orderInfo);
+
+    const paymentDTO = new PaymentInfo().build(placeOrderDTO);
+    let paymentSavedInfo: PaymentInfo;
+    await firstValueFrom(
+      this.httpService.post(
+        'http://localhost:3000/payment-processing/credit-card/payment/new',
+        JSON.stringify(paymentDTO),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      ),
+    ).then(async (res) => {
+      paymentSavedInfo = res.data.payment;
+      orderInfo.payment = paymentSavedInfo;
+      orderInfo.payment_confirm = res.data.confirmation;
+
+      orderSavedInfo = await orderRepository.save(orderInfo);
+    });
+
+    await firstValueFrom(
+      this.httpService.post(
+        'http://localhost:3000/shipment-processing/initiation',
+        JSON.stringify({
+          order_id: orderSavedInfo.order_id,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      ),
+    ).then((res) => {
+      orderSavedInfo = res.data;
+    });
 
     return JSON.stringify({
       message: 'created',
