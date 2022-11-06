@@ -1,4 +1,5 @@
 import { Item } from '../entities/Item';
+import { PaymentInfo } from '../entities/PaymentInfo';
 
 export interface MessageBase {
   message: string;
@@ -18,6 +19,7 @@ export interface PlaceOrderSuccessMessage extends MessageBase {
     zip: string;
   };
   payment: {
+    confirmation: string;
     card_last_four: string;
     name: string;
   };
@@ -29,4 +31,9 @@ export interface PlaceOrderFailedMessage extends MessageBase {
 
 export interface AddItemSuccessMessage extends MessageBase {
   item: Item;
+}
+
+export interface PaymentSuccessMessage extends MessageBase {
+  payment: PaymentInfo;
+  confirmation: string;
 }

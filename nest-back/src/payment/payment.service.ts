@@ -2,7 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PaymentDTO } from '../dtos/paymentDTO';
 import { AppDataSource_ORDER } from '../index';
 import { PaymentInfo } from '../entities/PaymentInfo';
-import { PlaceOrderFailedMessage } from '../typings/Response';
+import {
+  PaymentSuccessMessage,
+  PlaceOrderFailedMessage,
+} from '../typings/Response';
+import { faker } from '@faker-js/faker';
 
 @Injectable()
 export class PaymentService {
@@ -49,9 +53,10 @@ export class PaymentService {
       paymentSavedInfo = paymentInfo;
     }
 
-    return {
-      msg: 'success',
+    return JSON.stringify({
+      message: 'success',
       payment: paymentSavedInfo,
-    };
+      confirmation: faker.datatype.uuid(),
+    } as PaymentSuccessMessage);
   }
 }

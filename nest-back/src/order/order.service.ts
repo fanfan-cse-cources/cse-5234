@@ -45,7 +45,7 @@ export class OrderService {
     }
 
     const paymentDTO = new PaymentInfo().build(placeOrderDTO);
-    const res = await firstValueFrom(
+    const paymentRes = await firstValueFrom(
       this.httpService.post(
         'http://localhost:3000/payment-processing/credit-card/payment/new',
         JSON.stringify(paymentDTO),
@@ -57,11 +57,12 @@ export class OrderService {
       ),
     );
 
-    const paymentSavedInfo: PaymentInfo = res.data.payment;
+    const paymentSavedInfo: PaymentInfo = paymentRes.data.payment;
 
     const orderInfo = new Order().build(placeOrderDTO);
     orderInfo.payment = paymentSavedInfo;
     orderInfo.address = addressSavedInfo;
+    orderInfo.payment_confirm = paymentRes.data.confirmation;
 
     // retrieve required items
     const itemIdList = placeOrderDTO.line_items.map((i) => i.item_id);
@@ -109,24 +110,6 @@ export class OrderService {
 
     const orderSavedInfo = await orderRepository.save(orderInfo);
 
-    // await (async () => {
-    //   try {
-    //     for (const item of await itemRepository.find({
-    //       where: {
-    //         itemId: In(itemIdList),
-    //       },
-    //     })) {
-    //       item.quantity -= placeOrderDTO.list_of_items.find(
-    //         (j) => j.id === item.itemId,
-    //       ).quantity;
-    //       await itemRepository.save(item);
-    //     }
-    //     orderSavedInfo = await orderRepository.save(orderInfo);
-    //   } catch (e) {
-    //     throw e;
-    //   }
-    // });
-
     return JSON.stringify({
       message: 'created',
       order: {
@@ -142,6 +125,7 @@ export class OrderService {
         zip: addressSavedInfo.zip,
       },
       payment: {
+        confirmation: orderSavedInfo.payment_confirm,
         card_last_four: paymentSavedInfo.number.slice(-4),
         name: paymentSavedInfo.card_name,
       },

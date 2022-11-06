@@ -31,11 +31,14 @@ export class Order {
   status: string;
 
   @ManyToOne(() => PaymentInfo, (info) => info.orders)
-  @JoinColumn({ name: 'paymentId' })
+  @JoinColumn({ name: 'payment_id' })
   payment: PaymentInfo;
 
+  @Column('text', { name: 'payment_confirmation', nullable: true })
+  payment_confirm: string;
+
   @ManyToOne(() => AddressInfo, (info) => info.orders)
-  @JoinColumn({ name: 'addressId' })
+  @JoinColumn({ name: 'address_id' })
   address: AddressInfo;
 
   @CreateDateColumn()

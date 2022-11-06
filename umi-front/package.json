@@ -9,7 +9,6 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@faker-js/faker": "^7.5.0",
     "bootstrap": "^5.2.1",
     "json-loader": "^0.5.7",
     "node-fetch": "^3.2.10",
