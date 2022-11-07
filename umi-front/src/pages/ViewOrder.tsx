@@ -5,13 +5,14 @@ import {OrderDetail} from "@/models/OrderDetail";
 import {Item} from "@/models/Item";
 
 
-export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item> }> {
+export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string }> {
 
   constructor(props: Readonly<{}>) {
     super(props);
     this.state = {
       orderId: 0,
-      items: new Array<Item>()
+      items: new Array<Item>(),
+      paymentConfirmation: "undefined",
     };
     this.getCurrentOrder()
       .catch(e => {
@@ -20,8 +21,14 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
   }
 
   getCurrentOrder = async () => {
+    const paymentConfirmation = localStorage.getItem('paymentConfirmation');
+    let paymentConfirmationRes = "null";
+    if (paymentConfirmation !== null) {
+      paymentConfirmationRes = paymentConfirmation;
+    }
+
     const productDetail = await (await fetch('http://localhost:3000/inventory-management/inventory/')).json() as Array<Item>;
-    const orderDetail = await (await fetch('http://localhost:3000/order-processing/order/view/3281c345-a3ed-45e4-b707-d97fc9adac2f')).json() as OrderDetail;
+    const orderDetail = await (await fetch(`http://localhost:3000/order-processing/order/view/${paymentConfirmationRes}`)).json() as OrderDetail;
 
     let lineItems: Array<Item>;
     try {
@@ -46,7 +53,7 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
       items.push(newItem);
     }
 
-    this.setState({orderId: orderDetail.order.order_id, items: items});
+    this.setState({orderId: orderDetail.order.order_id, items: items, paymentConfirmation: paymentConfirmationRes });
   }
 
   render() {

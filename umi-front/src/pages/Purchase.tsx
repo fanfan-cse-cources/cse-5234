@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button, Col, Container, Form, Row, Table} from "react-bootstrap";
 import {history} from 'umi';
 import {Item} from "@/models/Item";
@@ -6,12 +6,13 @@ import {Item} from "@/models/Item";
 
 export default function Purchase() {
   let items: Item[] = [];
-
   const [productDetail, setName] = useState([]);
 
-  fetch('http://localhost:3000/inventory-management/inventory/')
-    .then((response) => response.json())
-    .then((items) => setName(items));
+  useEffect(() => {
+    fetch('http://localhost:3000/inventory-management/inventory/')
+      .then((response) => response.json())
+      .then((items) => setName(items));
+  }, []);
 
   const onSubmit = () => {
     history.push('/purchase/confirmOrder', {state: items})

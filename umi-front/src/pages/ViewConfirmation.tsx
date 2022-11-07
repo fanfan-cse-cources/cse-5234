@@ -4,6 +4,8 @@ import {Col, Container, Row} from "react-bootstrap";
 import {history, useLocation} from "umi"
 import {generateTable} from './util/GenerateOrderDetails';
 import {OrderDetail} from "@/models/OrderDetail";
+import {useEffect, useState} from "react";
+
 
 export default function ViewConfirmation() {
   const historyState = useLocation().state as { state: object };
@@ -16,6 +18,11 @@ export default function ViewConfirmation() {
   const card = data.payment
   const order = data.order
   const line_items = JSON.parse(order.line_items)
+
+  const [paymentConfirmation, setPaymentConfirmation] = useState([]);
+  useEffect(() => {
+    localStorage.setItem('paymentConfirmation', card.confirmation);
+  }, [paymentConfirmation]);
 
   return (
     <Container>
