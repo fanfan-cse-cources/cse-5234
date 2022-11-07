@@ -3,9 +3,10 @@ import {Col, Container, Row} from "react-bootstrap";
 import {generateTable} from "@/pages/util/GenerateOrderDetails";
 import {OrderDetail} from "@/models/OrderDetail";
 import {Item} from "@/models/Item";
+import Alert from "react-bootstrap/Alert";
 
 
-export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string }> {
+export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string, status: string }> {
 
   constructor(props: Readonly<{}>) {
     super(props);
@@ -13,6 +14,7 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
       orderId: 0,
       items: new Array<Item>(),
       paymentConfirmation: "undefined",
+      status: "undefined",
     };
     this.getCurrentOrder()
       .catch(e => {
@@ -53,12 +55,27 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
       items.push(newItem);
     }
 
-    this.setState({orderId: orderDetail.order.order_id, items: items, paymentConfirmation: paymentConfirmationRes });
+    this.setState({
+      orderId: orderDetail.order.order_id,
+      items: items,
+      paymentConfirmation: paymentConfirmationRes,
+      status: orderDetail.order.status
+    });
   }
 
   render() {
     return (
       <Container>
+        <Row className={"justify-content-md-center mt-3"}>
+          <Col lg="1"></Col>
+          <Col lg="10">
+            <Alert variant='info'>
+              Current Status: {this.state.status.toUpperCase()}
+            </Alert>
+          </Col>
+          <Col lg="1"></Col>
+        </Row>
+
         <Row className={"justify-content-md-center mt-5"}>
           <Col lg="1"></Col>
           <Col lg="10">

@@ -40,6 +40,9 @@ export default function ViewConfirmation() {
           <Alert variant='success'>
             Your order #{order.order_id} has been confirmed, {address.name}.
           </Alert>
+          <Alert variant='info'>
+            Current Status: {order.status.toUpperCase()}
+          </Alert>
         </Col>
         <Col lg="1"></Col>
       </Row>

@@ -3,6 +3,7 @@ export interface OrderDetail {
   payment: { card_last_four: number, name: string, confirmation: string },
   order: {
     order_id: number,
-    line_items: string
+    line_items: string,
+    status: string
   }
 }
