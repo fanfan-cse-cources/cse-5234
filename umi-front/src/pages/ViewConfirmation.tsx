@@ -3,15 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import {Col, Container, Row} from "react-bootstrap";
 import {history, useLocation} from "umi"
 import {generateTable} from './util/GenerateOrderDetails';
-
-export interface orderDetail {
-  address: { name: string; addr_1: string; addr_2: string; city: string; state: string; zip: string; },
-  payment: { card_last_four: number, name: string, confirmation: string },
-  order: {
-    order_id: number,
-    line_items: string
-  }
-}
+import {OrderDetail} from "@/models/OrderDetail";
 
 export default function ViewConfirmation() {
   const historyState = useLocation().state as { state: object };
@@ -19,7 +11,7 @@ export default function ViewConfirmation() {
     return history.push("/purchase");
   }
 
-  const data = historyState.state as orderDetail;
+  const data = historyState.state as OrderDetail;
   const address = data.address
   const card = data.payment
   const order = data.order

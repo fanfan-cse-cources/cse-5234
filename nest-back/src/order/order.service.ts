@@ -146,8 +146,39 @@ export class OrderService {
       },
       payment: {
         confirmation: orderSavedInfo.payment_confirm,
-        card_last_four: paymentSavedInfo.number.slice(-4),
-        name: paymentSavedInfo.card_name,
+        card_last_four: orderSavedInfo.payment.number.slice(-4),
+        name: orderSavedInfo.payment.card_name,
+      },
+    } as PlaceOrderSuccessMessage);
+  }
+
+  async find(payment_confirmation: string) {
+    const orderRepository = AppDataSource_ORDER.getRepository(Order);
+    const current_order = await orderRepository.findOne({
+      where: {
+        payment_confirm: payment_confirmation,
+      },
+    });
+
+    return JSON.stringify({
+      message: 'viewed',
+      order: {
+        order_id: current_order.order_id,
+        line_items: current_order.line_items,
+        status: current_order.status,
+      },
+      address: {
+        name: current_order.address.name,
+        addr_1: current_order.address.addr_1,
+        addr_2: current_order.address.addr_2,
+        city: current_order.address.city,
+        state: current_order.address.state,
+        zip: current_order.address.zip,
+      },
+      payment: {
+        confirmation: current_order.payment_confirm,
+        card_last_four: current_order.payment.number.slice(-4),
+        name: current_order.payment.card_name,
       },
     } as PlaceOrderSuccessMessage);
   }

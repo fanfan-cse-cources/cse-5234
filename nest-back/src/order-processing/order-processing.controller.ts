@@ -1,6 +1,8 @@
 import {
   Body,
   Controller,
+  Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -16,5 +18,11 @@ export class OrderProcessingController {
   @UsePipes(ValidationPipe)
   public async CreateOrders(@Body() placeOrderDTO: PlaceOrderDTO) {
     return await this.orderService.create(placeOrderDTO);
+  }
+
+  @Get('order/view/:payment_confirmation')
+  @UsePipes(ValidationPipe)
+  public async FindOrder(@Param() params): Promise<string> {
+    return await this.orderService.find(params.payment_confirmation);
   }
 }

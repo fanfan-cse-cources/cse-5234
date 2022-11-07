@@ -1,11 +1,5 @@
 import {Table} from "react-bootstrap";
-
-export interface Item {
-  item_id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
+import {Item} from "@/models/Item";
 
 const generateOrderDetail = (orderDetail: Item, i: number) => {
   return (

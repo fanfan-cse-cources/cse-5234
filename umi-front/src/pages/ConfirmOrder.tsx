@@ -1,30 +1,9 @@
 import {generateTable} from "./util/GenerateOrderDetails"
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {history, useLocation} from 'umi';
-
-export interface Item {
-  item_id: number;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-export interface AddressInfo {
-  name: string;
-  addr_1: string;
-  addr_2: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
-export interface PaymentInfo {
-  number: string;
-  exp_month: string;
-  exp_year: string;
-  cvv: string;
-  card_name: string;
-}
+import {Item} from "@/models/Item";
+import {AddressInfo} from "@/models/AddressInfo";
+import {PaymentInfo} from "@/models/PaymentInfo";
 
 
 export default function ConfirmOrder() {
@@ -49,13 +28,10 @@ export default function ConfirmOrder() {
       })
     };
 
-    console.log(JSON.stringify(requestOptions))
-
     fetch('http://localhost:3000/order-processing/order/new', requestOptions)
       .then(async (response) => {
         return history.push('/purchase/viewConfirmation', {state: await response.json()})
       })
-    // .then(response => console.log(JSON.stringify(response)))
   }
 
   const historyState = useLocation().state as { state: object };

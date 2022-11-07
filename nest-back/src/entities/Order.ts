@@ -30,7 +30,7 @@ export class Order {
   @Column('text', { name: 'status' })
   status: string;
 
-  @ManyToOne(() => PaymentInfo, (info) => info.orders, { eager: false })
+  @ManyToOne(() => PaymentInfo, (info) => info.orders, { eager: true })
   @JoinColumn({ name: 'payment_id' })
   payment: PaymentInfo;
 
