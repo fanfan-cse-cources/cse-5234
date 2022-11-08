@@ -1,0 +1,70 @@
+version: '3.1'
+
+services:
+  db_orders:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME_ORDERS}
+      MYSQL_TCP_PORT: ${DATABASE_PORT_ORDERS}
+    volumes:
+      - db_orders_data:/var/lib/mysql
+    networks:
+      - backend
+    expose:
+      - ${DATABASE_PORT_ORDERS}
+
+  db_inventory:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME_INVENTORY}
+      MYSQL_TCP_PORT: ${DATABASE_PORT_INVENTORY}
+    volumes:
+      - db_inventory_data:/var/lib/mysql
+    networks:
+      - backend
+    expose:
+      - ${DATABASE_PORT_INVENTORY}
+
+  nest_back:
+    image: nest-back
+    build:
+      dockerfile: ./Dockerfile
+      context: ./nest-back
+    depends_on:
+      - db_orders
+      - db_inventory
+    command: bash -c 'while !</dev/tcp/db_orders/${DATABASE_PORT_ORDERS} || !</dev/tcp/db_inventory/${DATABASE_PORT_INVENTORY}; do sleep 1; done; npm start'
+    networks:
+      - backend
+    restart: always
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+
+  umi_front:
+    image: umi-front
+    build:
+      dockerfile: ./Dockerfile
+      context: ./umi-front
+    restart: always
+    depends_on:
+      - nest_back
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "8000:8000"
+
+networks:
+  frontend:
+  backend:
+    driver: bridge
+
+volumes:
+    db_orders_data:
+    db_inventory_data:

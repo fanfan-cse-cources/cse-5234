@@ -95,7 +95,7 @@ export class OrderService {
     let paymentSavedInfo: PaymentInfo;
     await firstValueFrom(
       this.httpService.post(
-        'http://localhost:3000/payment-processing/credit-card/payment/new',
+        `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/payment-processing/credit-card/payment/new`,
         JSON.stringify(paymentDTO),
         {
           headers: {

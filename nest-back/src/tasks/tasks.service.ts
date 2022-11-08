@@ -23,7 +23,7 @@ export class TasksService {
       order.status = 'processing';
       await firstValueFrom(
         this.httpService.post(
-          'http://localhost:3000/shipment-processing/initiation',
+          `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/shipment-processing/initiation`,
           JSON.stringify({
             order_id: order.order_id,
           }),

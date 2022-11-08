@@ -10,8 +10,8 @@ ConfigModule.forRoot();
 
 export const AppDataSource_ORDER = new DataSource({
   type: 'mysql',
-  host: process.env.DATABASE_HOST,
-  port: Number(process.env.DATABASE_PORT),
+  host: process.env.DATABASE_HOST_ORDERS,
+  port: Number(process.env.DATABASE_PORT_ORDERS),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME_ORDERS,
@@ -22,8 +22,8 @@ export const AppDataSource_ORDER = new DataSource({
 
 export const AppDataSource_INVENTORY = new DataSource({
   type: 'mysql',
-  host: process.env.DATABASE_HOST,
-  port: Number(process.env.DATABASE_PORT),
+  host: process.env.DATABASE_HOST_INVENTORY,
+  port: Number(process.env.DATABASE_PORT_INVENTORY),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME_INVENTORY,
