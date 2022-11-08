@@ -12,8 +12,6 @@ import { PaymentInfo } from './entities/PaymentInfo';
 import { AddressInfo } from './entities/AddressInfo';
 import { OrderProcessingController } from './order-processing/order-processing.controller';
 import { OrderService } from './order/order.service';
-import { PaymentInfoModule } from './payment-info/payment-info.module';
-import { ShippingInfoModule } from './shipping-info/shipping-info.module';
 import { OrderModule } from './order/order.module';
 import { ShipmentProcessingController } from './shipment-processing/shipment-processing.controller';
 import { PaymentProcessingController } from './payment-processing/payment-processing.controller';
@@ -49,8 +47,6 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     TypeOrmModule.forFeature([Item, Order, PaymentInfo, AddressInfo]),
     ItemModule,
-    PaymentInfoModule,
-    ShippingInfoModule,
     OrderModule,
     HttpModule,
   ],

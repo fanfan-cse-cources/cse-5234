@@ -5,7 +5,6 @@ import { Order } from '../entities/Order';
 import { Item } from '../entities/Item';
 import { In } from 'typeorm';
 import { PlaceOrderFailedMessage } from '../typings/Response';
-import { AddressInfo } from '../entities/AddressInfo';
 
 @Injectable()
 export class ShipmentService {
@@ -23,7 +22,6 @@ export class ShipmentService {
   }
 
   async complete(orderStateDTO: OrderStateDTO) {
-    const addressRepository = AppDataSource_ORDER.getRepository(AddressInfo);
     const itemRepository = AppDataSource_INVENTORY.getRepository(Item);
     const orderRepository = AppDataSource_ORDER.getRepository(Order);
 

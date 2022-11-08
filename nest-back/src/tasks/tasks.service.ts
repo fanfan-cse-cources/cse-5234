@@ -8,6 +8,7 @@ import { HttpService } from '@nestjs/axios';
 @Injectable()
 export class TasksService {
   private readonly logger = new Logger(TasksService.name);
+
   constructor(private readonly httpService: HttpService) {}
 
   @Cron(CronExpression.EVERY_30_SECONDS)
