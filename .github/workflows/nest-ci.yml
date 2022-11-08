@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm i -g @nestjs/cli
+        run: yarn global add @nestjs/cli
       - name: Install dependencies
         run: yarn install
       - name: Build backend
