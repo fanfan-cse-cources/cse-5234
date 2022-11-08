@@ -88,11 +88,9 @@ export class OrderService {
         placeOrderDTO.line_items.find((j) => j.item_id === i.item_id).quantity;
     }
     orderInfo.total_price = totalPrice;
-
     orderInfo.status = 'new';
 
-    let orderSavedInfo = await orderRepository.save(orderInfo);
-
+    let orderSavedInfo: Order;
     const paymentDTO = new PaymentInfo().build(placeOrderDTO);
     let paymentSavedInfo: PaymentInfo;
     await firstValueFrom(
@@ -111,22 +109,6 @@ export class OrderService {
       orderInfo.payment_confirm = res.data.confirmation;
 
       orderSavedInfo = await orderRepository.save(orderInfo);
-    });
-
-    await firstValueFrom(
-      this.httpService.post(
-        'http://localhost:3000/shipment-processing/initiation',
-        JSON.stringify({
-          order_id: orderSavedInfo.order_id,
-        }),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      ),
-    ).then((res) => {
-      orderSavedInfo = res.data;
     });
 
     return JSON.stringify({

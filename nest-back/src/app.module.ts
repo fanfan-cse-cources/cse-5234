@@ -20,9 +20,12 @@ import { PaymentProcessingController } from './payment-processing/payment-proces
 import { PaymentService } from './payment/payment.service';
 import { ShipmentService } from './shipment/shipment.service';
 import { HttpModule } from '@nestjs/axios';
+import { TasksService } from './tasks/tasks.service';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -64,6 +67,7 @@ import { HttpModule } from '@nestjs/axios';
     OrderService,
     PaymentService,
     ShipmentService,
+    TasksService,
   ],
 })
 export class AppModule {}
