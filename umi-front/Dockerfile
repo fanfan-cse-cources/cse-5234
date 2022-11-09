@@ -15,4 +15,3 @@ CMD [ "yarn", "start" ]
 EXPOSE 8000
 
 LABEL org.opencontainers.image.title="umi-front"
-
