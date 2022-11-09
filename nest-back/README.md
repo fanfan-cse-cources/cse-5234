@@ -40,21 +40,21 @@ $ mysql -u root -p < src/db/init.sql
 ## Installation
 
 ```bash
-$ npm i -g @nestjs/cli
-$ npm install
+$ yarn global add @nestjs/cli
+$ yarn install
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start dev
 
 # production mode
-$ npm run start:prod
+$ yarn start prod
 ```
 
 ## Test
