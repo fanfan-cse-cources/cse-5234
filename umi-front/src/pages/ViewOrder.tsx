@@ -67,29 +67,29 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
     return (
       <Container>
         <Row className={"justify-content-md-center mt-3"}>
-          <Col lg="1"></Col>
-          <Col lg="10">
+          <Col lg={1}></Col>
+          <Col lg={10}>
             <Alert variant='info'>
               Current Status: {this.state.status.toUpperCase()}
             </Alert>
           </Col>
-          <Col lg="1"></Col>
+          <Col lg={1}></Col>
         </Row>
 
         <Row className={"justify-content-md-center mt-5"}>
-          <Col lg="1"></Col>
-          <Col lg="10">
+          <Col lg={1}></Col>
+          <Col lg={10}>
             <h1>Order #{this.state.orderId}</h1>
           </Col>
-          <Col lg="1"></Col>
+          <Col lg={1}></Col>
         </Row>
 
         <Row className={"justify-content-md-center mt-3"}>
-          <Col lg="1"></Col>
-          <Col lg="10">
+          <Col lg={1}></Col>
+          <Col lg={10}>
             {generateTable(this.state.items)}
           </Col>
-          <Col lg="1"></Col>
+          <Col lg={1}></Col>
         </Row>
       </Container>
     );

@@ -46,25 +46,25 @@ export default function ConfirmOrder() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg="1"></Col>
-        <Col lg="10">
+        <Col lg={1}></Col>
+        <Col lg={10}>
           <h1>Make Your Payment</h1>
         </Col>
-        <Col lg="1"></Col>
+        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg="1"></Col>
-        <Col lg="10">
+        <Col lg={1}></Col>
+        <Col lg={10}>
           <h2>Details</h2>
           {generateTable(items)}
         </Col>
-        <Col lg="1"></Col>
+        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg="1"></Col>
-        <Col lg="5">
+        <Col lg={1}></Col>
+        <Col lg={5}>
           <h2>Delivery</h2>
           <Form as={Row}>
             <Form.Group className={"mb-3"} controlId="recipient">
@@ -88,7 +88,7 @@ export default function ConfirmOrder() {
               }}/>
             </Form.Group>
 
-            <Col lg="6">
+            <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="city">
                 <Form.Label>City</Form.Label>
                 <Form.Control type="text" onChange={(e) => {
@@ -96,7 +96,7 @@ export default function ConfirmOrder() {
                 }}/>
               </Form.Group>
             </Col>
-            <Col lg="6">
+            <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="state">
                 <Form.Label>State</Form.Label>
                 <Form.Control type="text" onChange={(e) => {
@@ -105,7 +105,7 @@ export default function ConfirmOrder() {
               </Form.Group>
             </Col>
 
-            <Col lg="6">
+            <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="zip">
                 <Form.Label>Zip Code</Form.Label>
                 <Form.Control type="text" onChange={(e) => {
@@ -116,7 +116,7 @@ export default function ConfirmOrder() {
           </Form>
         </Col>
 
-        <Col lg="5">
+        <Col lg={5}>
           <h2>Payment</h2>
           <Form as={Row}>
             <Form.Group className={"mb-3"} controlId="card_holder">
@@ -133,7 +133,7 @@ export default function ConfirmOrder() {
               }}/>
             </Form.Group>
 
-            <Col lg="6">
+            <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="cvv">
                 <Form.Label>CVV</Form.Label>
                 <Form.Control type="password" onChange={(e) => {
@@ -142,8 +142,7 @@ export default function ConfirmOrder() {
               </Form.Group>
             </Col>
 
-            <Col lg="6">
-
+            <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="exp_date">
                 <Form.Label>Exp Date</Form.Label>
                 <Form.Control type="date" name='exp_date' onChange={(e) => {
@@ -154,17 +153,17 @@ export default function ConfirmOrder() {
             </Col>
           </Form>
         </Col>
-        <Col lg="1"></Col>
+        <Col lg={1}></Col>
       </Row>
 
       <Row>
-        <Col lg="1"></Col>
-        <Col lg="10" className={"d-grid gap-2"}>
+        <Col lg={1}></Col>
+        <Col lg={10} className={"d-grid gap-2"}>
           <Button variant="primary" onClick={(event) => finishOrder(items, addressDetail, cardDetail)}>
             Confirm Order
           </Button>
         </Col>
-        <Col lg="1"></Col>
+        <Col lg={1}></Col>
       </Row>
     </Container>
   );
