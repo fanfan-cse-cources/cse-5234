@@ -27,15 +27,12 @@ export default function ViewConfirmation() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <h1>Confirmation</h1>
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <Alert variant='success'>
             Your order #{order.order_id} has been confirmed, {address.name}.
@@ -44,20 +41,16 @@ export default function ViewConfirmation() {
             Current Status: {order.status.toUpperCase()}
           </Alert>
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       {<Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <h2>Your Orders</h2>
           {generateTable(line_items)}
         </Col>
-        <Col lg={1}></Col>
       </Row>}
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={5}>
           <h2>Delivery</h2>
           <p>{address.name}</p>
@@ -72,7 +65,6 @@ export default function ViewConfirmation() {
           <p>{card.name}</p>
           <p>{card.card_last_four}</p>
         </Col>
-        <Col lg={1}></Col>
       </Row>
     </Container>
   );

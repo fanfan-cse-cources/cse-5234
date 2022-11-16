@@ -21,15 +21,12 @@ export default function Purchase() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <h1>Select Your Order</h1>
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <Form method="GET" id="my_form">
             <Table>
@@ -72,7 +69,6 @@ export default function Purchase() {
             </Table>
           </Form>
         </Col>
-        <Col lg={1}></Col>
       </Row>
       <Row>
         <Col lg={1}></Col>

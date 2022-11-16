@@ -46,24 +46,19 @@ export default function ConfirmOrder() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <h1>Make Your Payment</h1>
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={10}>
           <h2>Details</h2>
           {generateTable(items)}
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={1}></Col>
         <Col lg={5}>
           <h2>Delivery</h2>
           <Form as={Row}>
@@ -153,7 +148,6 @@ export default function ConfirmOrder() {
             </Col>
           </Form>
         </Col>
-        <Col lg={1}></Col>
       </Row>
 
       <Row>
