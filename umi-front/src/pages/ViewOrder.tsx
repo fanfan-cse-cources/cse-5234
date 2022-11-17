@@ -1,9 +1,10 @@
 import React from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 import {generateTable} from "@/pages/util/GenerateOrderDetails";
 import {OrderDetail} from "@/models/OrderDetail";
 import {Item} from "@/models/Item";
 import Alert from "react-bootstrap/Alert";
+import '../layouts/index.less';
 
 
 export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string, status: string }> {
@@ -67,23 +68,17 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
     return (
       <Container>
         <Row className={"justify-content-md-center mt-3"}>
-          <Col lg={10}>
-            <Alert variant='info'>
-              Current Status: {this.state.status.toUpperCase()}
-            </Alert>
-          </Col>
+          <Alert variant='info'>
+            Current Status: {this.state.status.toUpperCase()}
+          </Alert>
         </Row>
 
         <Row className={"justify-content-md-center mt-5"}>
-          <Col lg={10}>
-            <h1>Order #{this.state.orderId}</h1>
-          </Col>
+          <h1>Order #{this.state.orderId}</h1>
         </Row>
 
         <Row className={"justify-content-md-center mt-3"}>
-          <Col lg={10}>
-            {generateTable(this.state.items)}
-          </Col>
+          {generateTable(this.state.items)}
         </Row>
       </Container>
     );

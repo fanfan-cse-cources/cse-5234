@@ -5,6 +5,7 @@ import {history, useLocation} from "umi"
 import {generateTable} from './util/GenerateOrderDetails';
 import {OrderDetail} from "@/models/OrderDetail";
 import {useEffect, useState} from "react";
+import '../layouts/index.less';
 
 
 export default function ViewConfirmation() {
@@ -27,31 +28,25 @@ export default function ViewConfirmation() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg={10}>
-          <h1>Confirmation</h1>
-        </Col>
+        <h1>Confirmation</h1>
       </Row>
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={10}>
-          <Alert variant='success'>
-            Your order #{order.order_id} has been confirmed, {address.name}.
-          </Alert>
-          <Alert variant='info'>
-            Current Status: {order.status.toUpperCase()}
-          </Alert>
-        </Col>
+        <Alert variant='success'>
+          Your order #{order.order_id} has been confirmed, {address.name}.
+        </Alert>
+        <Alert variant='info'>
+          Current Status: {order.status.toUpperCase()}
+        </Alert>
       </Row>
 
       {<Row className={"justify-content-md-center mt-3"}>
-        <Col lg={10}>
-          <h2>Your Orders</h2>
-          {generateTable(line_items)}
-        </Col>
+        <h2>Your Orders</h2>
+        {generateTable(line_items)}
       </Row>}
 
       <Row className={"justify-content-md-center mt-3"}>
-        <Col lg={5}>
+        <Col lg={6}>
           <h2>Delivery</h2>
           <p>{address.name}</p>
           <p>{address.addr_1}</p>
@@ -59,7 +54,7 @@ export default function ViewConfirmation() {
           <p>{address.city}, {address.state} {address.zip}</p>
         </Col>
 
-        <Col lg={5}>
+        <Col lg={6}>
           <h2>Payment</h2>
           <p>Confirmation: {card.confirmation}</p>
           <p>{card.name}</p>

@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react"
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Card, Container, Row} from "react-bootstrap";
 import request from "umi-request";
+import '../layouts/index.less';
+
 
 export default function HomePage() {
   const [productDetail, setProductDetail] = useState([]);
@@ -23,13 +25,11 @@ export default function HomePage() {
   return (
     <Container>
       <Row className={"justify-content-md-center mt-5"}>
-        <Col lg={10}>
-          <h1>Welcome</h1>
-        </Col>
+        <h1>Welcome</h1>
       </Row>
 
       <div className="m-test-wrap mt-3">
-        <Row md={1} lg={3} className="g-4">
+        <Row sm={1} md={2} lg={3} className="g-4">
           {productDetail.map((_, index) => {
             return (
               <Card key={index}>
