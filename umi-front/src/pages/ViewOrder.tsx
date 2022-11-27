@@ -1,13 +1,15 @@
 import React from "react";
-import {Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {generateTable} from "@/pages/util/GenerateOrderDetails";
 import {OrderDetail} from "@/models/OrderDetail";
 import {Item} from "@/models/Item";
 import Alert from "react-bootstrap/Alert";
 import '../layouts/index.less';
+import {AddressInfo} from "@/models/AddressInfo";
+import {PaymentInfoRes} from "@/models/PaymentInfoRes";
 
 
-export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string, status: string }> {
+export default class ViewOrder extends React.Component<{}, { orderId: number, items: Array<Item>, paymentConfirmation: string, status: string, address: AddressInfo, payment: PaymentInfoRes }> {
 
   constructor(props: Readonly<{}>) {
     super(props);
@@ -16,6 +18,19 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
       items: new Array<Item>(),
       paymentConfirmation: "undefined",
       status: "undefined",
+      address: {
+        name: "undefined",
+        addr_1: "undefined",
+        addr_2: "undefined",
+        city: "undefined",
+        state: "undefined",
+        zip: "undefined",
+      } as unknown as AddressInfo,
+      payment: {
+        confirmation: "undefined",
+        card_last_four: "undefined",
+        name: "undefined",
+      } as unknown as PaymentInfoRes,
     };
     this.getCurrentOrder()
       .catch(e => {
@@ -60,7 +75,9 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
       orderId: orderDetail.order.order_id,
       items: items,
       paymentConfirmation: paymentConfirmationRes,
-      status: orderDetail.order.status
+      status: orderDetail.order.status,
+      address: orderDetail.address as unknown as AddressInfo,
+      payment: orderDetail.payment as unknown as PaymentInfoRes
     });
   }
 
@@ -79,6 +96,27 @@ export default class ViewOrder extends React.Component<{}, { orderId: number, it
 
         <Row className={"justify-content-md-center mt-3"}>
           {generateTable(this.state.items)}
+        </Row>
+
+        <Row className={"justify-content-md-center mt-3"}>
+          <Col lg={6}>
+            <h2>Delivery</h2>
+            <ul className={"conf"}>
+              <li>{this.state.address.name}</li>
+              <li>{this.state.address.addr_1}</li>
+              <li>{this.state.address.addr_2}</li>
+              <li>{this.state.address.city}, {this.state.address.state} {this.state.address.zip}</li>
+            </ul>
+          </Col>
+
+          <Col lg={6}>
+            <h2>Payment</h2>
+            <ul className={"conf"}>
+              <li>Confirmation: {this.state.paymentConfirmation}</li>
+              <li>{this.state.payment.name}</li>
+              <li>{this.state.payment.card_last_four}</li>
+            </ul>
+          </Col>
         </Row>
       </Container>
     );
