@@ -128,21 +128,36 @@ export default function ConfirmOrder() {
               }}/>
             </Form.Group>
 
+            <Col lg={3}>
+              <Form.Group className={"mb-3"} controlId="exp_month">
+                <Form.Label>Exp. Month</Form.Label>
+                <Form.Select name={"month"} className={"form-control"} form="my_form" onChange={(e) => {
+                  cardDetail.exp_month = e.target.value;
+                }}>
+                  {Array.from({length: 12}, (_, i) => i + 1).map(i => (
+                    <option>{i}</option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+            <Col lg={3}>
+              <Form.Group className={"mb-3"} controlId="exp_year">
+                <Form.Label>Exp. Year</Form.Label>
+                <Form.Select name={"year"} className={"form-control"} form="my_form" onChange={(e) => {
+                  cardDetail.exp_year = e.target.value;
+                }}>
+                  {Array.from({length: 5}, (_, i) => Number(new Date().getFullYear()) + i).map(i => (
+                    <option>{i}</option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            </Col>
+
             <Col lg={6}>
               <Form.Group className={"mb-3"} controlId="cvv">
                 <Form.Label>CVV</Form.Label>
                 <Form.Control type="password" onChange={(e) => {
                   cardDetail.cvv = e.target.value;
-                }}/>
-              </Form.Group>
-            </Col>
-
-            <Col lg={6}>
-              <Form.Group className={"mb-3"} controlId="exp_date">
-                <Form.Label>Exp Date</Form.Label>
-                <Form.Control type="date" name='exp_date' onChange={(e) => {
-                  cardDetail.exp_year = e.target.value.split("-")[0];
-                  cardDetail.exp_month = e.target.value.split("-")[1];
                 }}/>
               </Form.Group>
             </Col>
