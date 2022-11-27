@@ -12,6 +12,7 @@
     "bootstrap": "^5.2.1",
     "json-loader": "^0.5.7",
     "node-fetch": "^3.2.10",
+    "rc-footer": "^0.6.6",
     "react-bootstrap": "^2.5.0",
     "umi": "^4.0.19",
     "umi-request": "^1.4.0",

@@ -1,5 +1,7 @@
 import {Outlet} from 'umi';
 import {Container, Image, Nav, Navbar} from "react-bootstrap";
+import Footer from "rc-footer";
+import 'rc-footer/assets/index.css';
 
 export default function Layout() {
   return (
@@ -29,6 +31,59 @@ export default function Layout() {
       <Image src={require('../assets/banner.png')} width="100%"/>
 
       <Outlet/>
+
+      <div className={"footer-bar"}></div>
+
+      <Footer className='footer'
+              columns={[
+                {
+                  title: 'Contact US',
+                  items: [
+                    {
+                      title: '920 Boston-Providence Turnpike',
+                    },
+                    {
+                      title: 'Norwood, Maine 02062',
+                    },
+                    {
+                      title: '(781) 769-9600',
+                    },
+                  ],
+                },
+                {
+                  icon: (
+                    <img
+                      src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
+                      alt="more products"
+                    />
+                  ),
+                  title: 'More Products',
+                  items: [
+                    {
+                      icon: (
+                        <img
+                          src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg"
+                          alt="yuque"
+                        />
+                      ),
+                      title: 'Checkout Counter',
+                      description: 'Financial Management',
+                    },
+                    {
+                      icon: (
+                        <img
+                          src="https://gw.alipayobjects.com/zos/rmsportal/uHocHZfNWZOdsRUonZNr.png"
+                          alt="yuque"
+                        />
+                      ),
+                      title: 'Driver Solution',
+                      description: 'Deliver Management',
+                    },
+                  ],
+                },
+              ]}
+              bottom="Made with ❤️"
+      />
     </>
   );
 }
