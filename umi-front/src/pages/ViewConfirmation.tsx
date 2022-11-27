@@ -48,17 +48,21 @@ export default function ViewConfirmation() {
       <Row className={"justify-content-md-center mt-3"}>
         <Col lg={6}>
           <h2>Delivery</h2>
-          <p>{address.name}</p>
-          <p>{address.addr_1}</p>
-          <p>{address.addr_2}</p>
-          <p>{address.city}, {address.state} {address.zip}</p>
+          <ul className={"conf"}>
+            <li>{address.name}</li>
+            <li>{address.addr_1}</li>
+            <li>{address.addr_2}</li>
+            <li>{address.city}, {address.state} {address.zip}</li>
+          </ul>
         </Col>
 
         <Col lg={6}>
           <h2>Payment</h2>
-          <p>Confirmation: {card.confirmation}</p>
-          <p>{card.name}</p>
-          <p>{card.card_last_four}</p>
+          <ul className={"conf"}>
+            <li>Confirmation: {card.confirmation}</li>
+            <li>{card.name}</li>
+            <li>{card.card_last_four}</li>
+          </ul>
         </Col>
       </Row>
     </Container>
