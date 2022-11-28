@@ -69,14 +69,14 @@ export default function ConfirmOrder() {
               }}/>
             </Form.Group>
 
-            <Form.Group className={"mb-3"} controlId="addr_1">
+            <Form.Group className={"mb-3"} controlId="address_1">
               <Form.Label>Address 1</Form.Label>
               <Form.Control type="text" onChange={(e) => {
                 addressDetail.addr_1 = e.target.value;
               }}/>
             </Form.Group>
 
-            <Form.Group className={"mb-3"} controlId="addr_2">
+            <Form.Group className={"mb-3"} controlId="address_2">
               <Form.Label>Address 2</Form.Label>
               <Form.Control type="text" onChange={(e) => {
                 addressDetail.addr_2 = e.target.value;
@@ -131,7 +131,7 @@ export default function ConfirmOrder() {
             <Col lg={3}>
               <Form.Group className={"mb-3"} controlId="exp_month">
                 <Form.Label>Exp. Month</Form.Label>
-                <Form.Select name={"month"} className={"form-control"} form="my_form" onChange={(e) => {
+                <Form.Select name={"exp_month"} className={"form-control"} form="my_form" onChange={(e) => {
                   cardDetail.exp_month = e.target.value;
                 }}>
                   {Array.from({length: 12}, (_, i) => i + 1).map(i => (
@@ -143,7 +143,7 @@ export default function ConfirmOrder() {
             <Col lg={3}>
               <Form.Group className={"mb-3"} controlId="exp_year">
                 <Form.Label>Exp. Year</Form.Label>
-                <Form.Select name={"year"} className={"form-control"} form="my_form" onChange={(e) => {
+                <Form.Select name={"exp_year"} className={"form-control"} form="my_form" onChange={(e) => {
                   cardDetail.exp_year = e.target.value;
                 }}>
                   {Array.from({length: 5}, (_, i) => Number(new Date().getFullYear()) + i).map(i => (
