@@ -2,6 +2,7 @@ import {Outlet} from 'umi';
 import {Container, Image, Nav, Navbar} from "react-bootstrap";
 import Footer from "rc-footer";
 import 'rc-footer/assets/index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Layout() {
   return (
@@ -21,8 +22,9 @@ export default function Layout() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/purchase">Order Now</Nav.Link>
-              <Nav.Link href="/purchase/viewOrder">View Recent Order</Nav.Link>
+              <Nav.Link href="/menu">Menu</Nav.Link>
+              <Nav.Link href="/purchase">Order</Nav.Link>
+              <Nav.Link href="/purchase/viewOrder">Recent Order</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
