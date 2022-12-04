@@ -23,7 +23,7 @@ export default function HomePage() {
 
       <Row className={"justify-content-md-center mt-3"}>
         <Col>
-          <h3>Title 2</h3>
+          <h2>Title 3</h2>
         </Col>
       </Row>
     </Container>
