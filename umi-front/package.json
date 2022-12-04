@@ -14,8 +14,8 @@
     "node-fetch": "^3.2.10",
     "rc-footer": "^0.6.6",
     "react-bootstrap": "^2.5.0",
-    "umi": "^4.0.19",
-    "umi-request": "^1.4.0",
+    "umi": "^4.0.34",
+    "umi-request": "^1.2.3",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
